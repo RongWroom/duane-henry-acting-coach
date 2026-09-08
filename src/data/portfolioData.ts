@@ -41,13 +41,13 @@ export const SELECTED_WORKS_DATA = {
   sectionTitle: "SELECTED WORKS & FILMOGRAPHY",
   subtitle: "PERFORMANCE RETROSPECTIVE",
   featuredReel: {
-    badge: "DRAMATIC REEL • 04:18",
+    badge: "DURATION • 09:58",
     location: "US & UK PRODUCTIONS",
     subheading: "PERFORMANCE RETROSPECTIVE",
-    title: "The Dramatic Reel",
+    title: "Duane Henry - Theatrical Reel",
     description:
       "Selected dramatic scenes from CBS's NCIS, Marvel Studios' Captain Marvel, BBC productions, and independent British cinema.",
-    duration: "04:18",
+    duration: "09:58",
     stillUrl:
       "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&q=85&w=1600",
   },

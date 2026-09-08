@@ -46,7 +46,7 @@ export const ReelModal: React.FC<ReelModalProps> = ({ isOpen, onClose }) => {
         {/* Real Vimeo Video Player */}
         <div className="relative aspect-[16/9] w-full bg-black flex items-center justify-center overflow-hidden">
           <iframe
-            src="https://player.vimeo.com/video/1206826083?h=560a2894c0&autoplay=1&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+            src="https://player.vimeo.com/video/1206826083?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             className="w-full h-full absolute inset-0 border-0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
