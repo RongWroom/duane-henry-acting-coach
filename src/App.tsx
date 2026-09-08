@@ -13,10 +13,10 @@ export default function App() {
   const [reelModalOpen, setReelModalOpen] = useState(false);
   const [consultationModalOpen, setConsultationModalOpen] = useState(false);
   const [preselectedObjective, setPreselectedObjective] = useState<string>(
-    'Scene Study & Intensive Monologues'
+    'Scene Study & Monologue Work'
   );
 
-  const handleExploreMasterclass = () => {
+  const handleExploreCoaching = () => {
     const el = document.getElementById('coaching');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -35,26 +35,34 @@ export default function App() {
     setConsultationModalOpen(true);
   };
 
+  const handleOpenReel = () => {
+    setReelModalOpen(true);
+  };
+
   return (
-    <div className="relative min-h-screen bg-[#fdf9f3] text-[#1A1715] font-sans selection:bg-[#DDD5C7] selection:text-[#1A1715]">
-      {/* Editorial Navigation Header */}
+    <div className="relative min-h-screen bg-[#0b0b0e] text-white font-sans selection:bg-[#c5a059] selection:text-black">
+      {/* Navigation Header */}
       <Header onOpenConsultation={handleOpenConsultation} />
 
-      {/* Main Content Sections */}
+      {/* Main Sections with Unified Flow */}
       <main>
-        {/* Section 01: The Hero ("The Craft") */}
-        <HeroSection onExploreMasterclass={handleExploreMasterclass} />
+        {/* Hero Section */}
+        <HeroSection
+          onExploreCoaching={handleExploreCoaching}
+          onWatchReel={handleOpenReel}
+          onBookSession={handleOpenConsultation}
+        />
 
-        {/* Section 02: Biography */}
+        {/* Biography */}
         <BiographySection />
 
-        {/* Section 03: Selected Works & Filmography */}
-        <WorksSection onWatchReel={() => setReelModalOpen(true)} />
+        {/* Selected Works & Reel */}
+        <WorksSection onWatchReel={handleOpenReel} />
 
-        {/* Section 04: Mentorship & Studio */}
+        {/* Coaching & 1-1 Sessions */}
         <CoachingSection onSelectModule={handleSelectModule} />
 
-        {/* Section 05: Inquiries & Application Form */}
+        {/* Inquiries & Booking Form */}
         <InquiriesSection preselectedObjective={preselectedObjective} />
       </main>
 
@@ -64,7 +72,7 @@ export default function App() {
       {/* Interactive Reel Modal */}
       <ReelModal isOpen={reelModalOpen} onClose={() => setReelModalOpen(false)} />
 
-      {/* Interactive Consultation Booking Modal */}
+      {/* Interactive Session Booking Modal */}
       <ConsultationModal
         isOpen={consultationModalOpen}
         onClose={() => setConsultationModalOpen(false)}
