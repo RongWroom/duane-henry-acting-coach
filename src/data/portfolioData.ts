@@ -49,7 +49,7 @@ export const SELECTED_WORKS_DATA = {
       "Selected dramatic scenes from CBS's NCIS, Marvel Studios' Captain Marvel, BBC productions, and independent British cinema.",
     duration: "09:58",
     stillUrl:
-      "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&q=85&w=1600",
+      "/images/duane_henry_on_stage.jpeg",
   },
   credits: [
     {
