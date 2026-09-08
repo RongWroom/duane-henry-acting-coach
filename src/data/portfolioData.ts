@@ -1,16 +1,14 @@
 import { CreditItem, CurriculumModule, RepresentationContact } from '../types';
 
 export const HERO_DATA = {
-  volume: "VOL. XXIV — 2025",
   department: "DRAMATIC ARTS & CONSERVATORY",
   specialties: "STAGE • SCREEN • PRIVATE COACHING",
-  coordinates: "51°30'N 0°07'W · 34°03'N 118°15'W",
+  coordinates: "LONDON • LOS ANGELES",
   tagline: "PORTFOLIO & PRIVATE MASTERCLASS",
   nameFirst: "DUANE",
   nameLast: "HENRY.",
   biographySummary:
     "Veteran actor of stage and screen. Special Agent Clayton Reeves on CBS's NCIS, Marvel Studios' Captain Marvel, and leading dramatic instructions. Cultivating unapologetic truth in the next echelon of screen talent.",
-  figureCaption: "FIG. 01 — LONDON / LOS ANGELES",
   portraitUrl:
     "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=85&w=1200",
   tickerItems: ["BAFTA RECOGNIZED", "CBS TELEVISION", "MARVEL STUDIOS"],

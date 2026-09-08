@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, MapPin, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { ChevronDown, MapPin, ArrowUpRight } from 'lucide-react';
 import { COACHING_DATA } from '../data/portfolioData';
 
 interface CoachingSectionProps {
@@ -94,40 +94,24 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
 
                   {/* Accordion Row Expanded Content */}
                   {isOpen && (
-                    <div className="pb-7 pt-1 pl-7 sm:pl-10 text-[#1A1715] animate-in fade-in-50 duration-200">
-                      <p className="text-[15px] leading-[1.8] font-light text-[#1A1715]/85 max-w-xl mb-5">
+                    <div className="pb-8 pt-2 pl-7 sm:pl-10 text-[#1A1715] animate-in fade-in-50 duration-200">
+                      <p className="text-[15px] leading-[1.8] font-light text-[#1A1715]/85 max-w-2xl">
                         {item.description}
                       </p>
 
-                      {/* Focus Areas Pills */}
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {item.focusAreas.map((focus) => (
-                          <span
-                            key={focus}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#f7f3ed] border border-[#DDD5C7] text-[10px] font-semibold tracking-[0.1em] uppercase text-[#5A5D4F]"
-                          >
-                            <CheckCircle2 className="w-3 h-3 text-[#5A5D4F]" />
-                            <span>{focus}</span>
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Deliverables & Direct Enrollment Action */}
-                      <div className="p-4 bg-[#fdf9f3] border border-[#DDD5C7] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div className="text-[12px] font-light text-[#8C8275]">
-                          <strong className="font-semibold text-[#1A1715] uppercase tracking-wider text-[10px] block mb-0.5">
-                            Standard Deliverable:
-                          </strong>
+                      <div className="mt-5 pt-4 border-t border-[#DDD5C7]/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <p className="text-[13px] text-[#8C8275] font-light leading-relaxed max-w-lg">
+                          <span className="text-[#1A1715] font-medium">Includes:</span>{' '}
                           {item.deliverables}
-                        </div>
+                        </p>
 
                         <button
                           type="button"
                           onClick={() => onSelectModule(item.title)}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1A1715] hover:bg-[#5A5D4F] text-[#FDFCF7] text-[10px] font-semibold tracking-[0.15em] uppercase transition-colors flex-shrink-0"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A1715] hover:bg-[#5A5D4F] text-[#FDFCF7] text-[11px] font-semibold tracking-[0.16em] uppercase transition-colors flex-shrink-0 self-start sm:self-auto"
                         >
                           <span>Select Module</span>
-                          <ArrowUpRight className="w-3 h-3" />
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>

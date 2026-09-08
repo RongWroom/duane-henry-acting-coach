@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onOpenConsultation: () => void;
@@ -19,17 +19,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-sand/60 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14 h-20 flex items-center justify-between">
-        {/* Left: Logo & Location Pill */}
-        <div className="flex items-center space-x-4">
+        {/* Left: Logo */}
+        <div className="flex items-center">
           <a
             href="#craft"
             className="font-serif text-[20px] sm:text-[22px] tracking-[0.08em] uppercase text-deep-espresso font-normal hover:opacity-80 transition-opacity"
           >
             Duane Henry
           </a>
-          <span className="hidden md:inline-flex items-center px-2.5 py-0.5 text-[10px] tracking-[0.18em] uppercase text-muted-taupe border border-sand rounded-none bg-surface-container-low/60">
-            L.A. / London
-          </span>
         </div>
 
         {/* Center: Desktop Navigation Links */}
@@ -54,14 +51,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
             Book Consultation
           </button>
 
-          <button
-            onClick={onOpenConsultation}
-            aria-label="User account or consultation portal"
-            className="w-9 h-9 flex items-center justify-center border border-sand text-deep-espresso hover:bg-surface-container transition-colors rounded-full"
-          >
-            <User className="w-4 h-4" />
-          </button>
-
           {/* Mobile hamburger menu toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -77,11 +66,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-surface border-b border-sand px-6 py-6 shadow-xl animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-4">
-            <div className="pb-2 border-b border-sand/50 flex justify-between items-center">
-              <span className="text-[10px] tracking-[0.2em] uppercase text-muted-taupe">
-                L.A. / London • Vol. XXIV
-              </span>
-            </div>
             {navLinks.map((link) => (
               <a
                 key={link.label}
