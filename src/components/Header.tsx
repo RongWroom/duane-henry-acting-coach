@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0c0c10] border-b border-white/10 px-6 py-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden bg-[#0a1416] border-b border-white/10 px-6 py-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-4">
             {navLinks.map((link) => (
               <a

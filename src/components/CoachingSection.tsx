@@ -18,7 +18,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
   };
 
   return (
-    <section id="coaching" className="bg-[#0e0e13] py-20 md:py-28 border-t border-white/10 text-white">
+    <section id="coaching" className="bg-[#0c1517] py-20 md:py-28 border-t border-white/10 text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14">
         {/* Section Header */}
         <ScrollReveal>
@@ -50,7 +50,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
 
             {/* Session Format Info */}
             <ScrollReveal delay={0.2}>
-              <div className="bg-[#14141a] border border-white/10 rounded-xl p-6 text-zinc-300">
+              <div className="bg-[#0f1a1c] border border-white/10 rounded-2xl p-6 text-zinc-300">
                 <div className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#c5a059] mb-2">
                   {sessionLocations.label}
                 </div>
@@ -74,16 +74,16 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
               return (
                 <ScrollReveal key={item.id} delay={0.1 + idx * 0.08}>
                   <div
-                    className={`rounded-xl transition-all duration-300 overflow-hidden border ${isOpen
-                        ? 'bg-[#14141a] border-white/25 shadow-xl'
-                        : 'bg-[#14141a]/60 hover:bg-[#14141a] border-white/10'
+                    className={`rounded-2xl transition-all duration-300 overflow-hidden border ${isOpen
+                        ? 'bg-[#0f1a1c] border-white/25 shadow-xl'
+                        : 'bg-[#0f1a1c]/60 hover:bg-[#0f1a1c] border-white/10'
                       }`}
                   >
                     {/* Row Header */}
                     <button
                       type="button"
                       onClick={() => toggleAccordion(item.id)}
-                      className="w-full p-6 flex items-center justify-between text-left group gap-4"
+                      className="w-full p-6 flex items-center justify-between text-left group gap-4 cursor-pointer"
                       aria-expanded={isOpen}
                     >
                       <div className="flex items-center gap-4 flex-1 min-w-0">
@@ -122,7 +122,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                             {item.focusAreas.map((tag) => (
                               <span
                                 key={tag}
-                                className="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300 text-[11px] font-medium border border-white/10"
+                                className="px-2.5 py-1 rounded-full bg-white/5 text-zinc-300 text-[11px] font-medium border border-white/10"
                               >
                                 {tag}
                               </span>
@@ -134,7 +134,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                           <button
                             type="button"
                             onClick={() => onSelectModule(item.title)}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-colors"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-colors cursor-pointer"
                           >
                             <span>Book This Session</span>
                             <ArrowUpRight className="w-3.5 h-3.5" />

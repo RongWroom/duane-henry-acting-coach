@@ -56,7 +56,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[#121217] border border-white/15 rounded-2xl shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto text-white">
+      <div className="relative w-full max-w-2xl bg-[#0c1517] border border-white/15 rounded-2xl shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto text-white">
         <button
           onClick={onClose}
           aria-label="Close modal"
@@ -94,7 +94,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="Your Name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-[#1a1a22] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
+                  className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
                 />
               </div>
 
@@ -112,7 +112,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="your.email@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-[#1a1a22] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
+                  className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
                 />
               </div>
 
@@ -129,7 +129,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="https://www.spotlight.com/..."
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
-                  className="w-full bg-[#1a1a22] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
+                  className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
                 />
               </div>
 
@@ -145,14 +145,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   required
                   value={objective}
                   onChange={(e) => setObjective(e.target.value)}
-                  className="w-full bg-[#1a1a22] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white focus:outline-none focus:border-[#c5a059] transition-colors cursor-pointer"
+                  className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white focus:outline-none focus:border-[#c5a059] transition-colors cursor-pointer"
                 >
                   {COACHING_DATA.modules.map((m) => (
-                    <option key={m.id} value={m.title} className="bg-[#1a1a22]">
+                    <option key={m.id} value={m.title} className="bg-[#132022]">
                       {m.title} ({m.price})
                     </option>
                   ))}
-                  <option value="General Consultation" className="bg-[#1a1a22]">
+                  <option value="General Consultation" className="bg-[#132022]">
                     General Consultation
                   </option>
                 </select>
@@ -171,7 +171,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="Upcoming audition, callback details, or specific scenes you wish to deconstruct..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-[#1a1a22] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors resize-none"
+                  className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[15px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors resize-none"
                 />
               </div>
             </div>

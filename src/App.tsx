@@ -41,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0b0b0e] text-white font-sans selection:bg-[#c5a059] selection:text-black">
+    <div className="relative min-h-screen bg-[#070c0d] text-white font-sans selection:bg-[#c5a059] selection:text-black">
       {/* Circular Inverting Mouse Follower */}
       <SpotlightCursor />
 

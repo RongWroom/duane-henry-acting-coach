@@ -11,7 +11,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
   const { featuredReel, credits, sectionNumber, sectionTitle, subtitle } = SELECTED_WORKS_DATA;
 
   return (
-    <section id="works" className="bg-[#0b0b0e] py-20 md:py-28 border-t border-white/10 text-white relative">
+    <section id="works" className="bg-[#070c0d] py-20 md:py-28 border-t border-white/10 text-white relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14">
         {/* Section Header */}
         <ScrollReveal>
@@ -29,7 +29,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
         <ScrollReveal delay={0.1}>
           <div
             onClick={onWatchReel}
-            className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-xl bg-zinc-950 overflow-hidden group cursor-pointer border border-white/10 shadow-2xl mb-12 transition-all duration-300 hover:border-white/25"
+            className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl bg-zinc-950 overflow-hidden group cursor-pointer border border-white/10 shadow-2xl mb-12 transition-all duration-300 hover:border-white/25"
           >
             <img
               src={featuredReel.stillUrl}
@@ -41,7 +41,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
 
             {/* Top Bar on Reel Card */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-300">
-              <span className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+              <span className="bg-[#070c0d]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
                 {featuredReel.badge}
               </span>
               <span className="hidden sm:inline-block text-zinc-400">
@@ -87,7 +87,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {credits.map((credit) => (
             <StaggerItem key={credit.id}>
-              <div className="p-6 rounded-xl bg-[#131317] border border-white/10 hover:border-white/20 transition-all duration-300 flex flex-col justify-between h-full group">
+              <div className="p-6 rounded-2xl bg-[#0f1a1c] border border-white/10 hover:border-white/25 hover:bg-[#152427] transition-all duration-300 flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#c5a059]">

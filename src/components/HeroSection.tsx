@@ -17,11 +17,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="craft"
-      className="relative min-h-[92vh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-[#0b0b0e] text-white"
+      className="relative min-h-[92vh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-[#070c0d] text-white"
     >
-      {/* Subtle single ambient depth */}
+      {/* Cinematic dark teal volumetric ambient glow */}
       <div
-        className="absolute top-20 right-10 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-20 right-10 w-[550px] h-[550px] bg-[#0e2c2b]/35 rounded-full blur-[160px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -91,7 +91,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Right Column: Architectural Framed Headshot (5 cols) */}
           <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
             <ScrollReveal delay={0.2} className="relative w-full max-w-sm sm:max-w-md">
-              <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-zinc-900 border border-white/10 shadow-2xl group">
+              <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#0f1a1c] border border-white/10 shadow-2xl group">
                 <img
                   src={HERO_DATA.portraitUrl}
                   alt="Duane Henry dramatic portrait"

@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-page-bg: #0b0b0e;
-  --color-card-bg: #131317;
-  --color-card-hover: #18181f;
+  --color-page-bg: #070c0d;
+  --color-page-bg-alt: #0c1517;
+  --color-card-bg: #0f1a1c;
+  --color-card-hover: #152427;
+  --color-input-bg: #132022;
   --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.2);
+  --color-border-hover: rgba(255, 255, 255, 0.22);
   --color-accent-gold: #c5a059;
   --color-accent-gold-light: #dfba73;
+  --color-teal-glow: #103330;
 
   --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -15,24 +18,24 @@
 
 @layer utilities {
   .glass-header {
-    background: rgba(11, 11, 14, 0.88);
+    background: rgba(7, 12, 13, 0.88);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
-/* Restrained scrollbar */
+/* Restrained dark cinematic teal scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0b0e;
+  background: #070c0d;
 }
 ::-webkit-scrollbar-thumb {
-  background: #23232a;
+  background: #192b2e;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #363640;
+  background: #254044;
 }

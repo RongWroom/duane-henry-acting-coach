@@ -44,7 +44,7 @@ export const ReelModal: React.FC<ReelModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-5xl bg-[#09090d] border border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-5xl bg-[#0c1517] border border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         {/* Header Bar */}
         <div className="p-4 sm:p-5 flex items-center justify-between border-b border-white/10 bg-black/50">
           <div className="flex items-center gap-3">

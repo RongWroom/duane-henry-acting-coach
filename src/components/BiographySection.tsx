@@ -4,7 +4,7 @@ import { ScrollReveal } from './ScrollReveal';
 
 export const BiographySection: React.FC = () => {
   return (
-    <section id="biography" className="bg-[#0e0e13] py-20 md:py-28 border-t border-white/10 text-white">
+    <section id="biography" className="bg-[#0c1517] py-20 md:py-28 border-t border-white/10 text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14">
         {/* Section Header */}
         <ScrollReveal>
@@ -23,10 +23,10 @@ export const BiographySection: React.FC = () => {
           {/* Left Column (5 cols): Pull Quote & Key Metrics */}
           <div className="lg:col-span-5 flex flex-col space-y-6">
             <ScrollReveal delay={0.1}>
-              {/* Refined Dark Pull Quote Card */}
-              <div className="bg-[#14141a] p-8 sm:p-10 rounded-xl border border-white/10 shadow-xl relative">
+              {/* Refined Dark Forest Pull Quote Card */}
+              <div className="bg-[#0f1a1c] p-8 sm:p-10 rounded-2xl border border-white/10 shadow-xl relative">
                 <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-5">
-                  Approach & Philosophy
+                  Approach &amp; Philosophy
                 </div>
 
                 <blockquote className="font-serif italic text-[22px] sm:text-[25px] leading-[1.45] text-zinc-100 mb-8 font-normal">
@@ -35,14 +35,14 @@ export const BiographySection: React.FC = () => {
 
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between text-[11px] tracking-[0.14em] uppercase text-zinc-400">
                   <span className="font-semibold text-white tracking-wider">{BIOGRAPHY_DATA.author}</span>
-                  <span>Actor & Coach</span>
+                  <span>Actor &amp; Coach</span>
                 </div>
               </div>
             </ScrollReveal>
 
             {/* 3-Column Metric Cards */}
             <ScrollReveal delay={0.2}>
-              <div className="bg-[#14141a] border border-white/10 rounded-xl grid grid-cols-3 divide-x divide-white/10 p-5 text-center">
+              <div className="bg-[#0f1a1c] border border-white/10 rounded-2xl grid grid-cols-3 divide-x divide-white/10 p-5 text-center">
                 {BIOGRAPHY_DATA.metrics.map((metric) => (
                   <div key={metric.label} className="px-2">
                     <div className="font-sans font-bold text-[28px] sm:text-[32px] text-white leading-none">
