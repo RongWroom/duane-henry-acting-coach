@@ -37,7 +37,13 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
 
         {/* Featured Reel Frame with Poster State & Vimeo Embed */}
         <ScrollReveal delay={0.1}>
-          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl bg-black overflow-hidden border border-white/15 shadow-2xl shadow-black/80 mb-14 group">
+          <div
+            className={`relative w-full rounded-2xl bg-black overflow-hidden border border-white/15 shadow-2xl shadow-black/80 mb-14 group ${
+              isPlaying
+                ? 'aspect-[16/9]'
+                : 'min-h-[380px] sm:min-h-0 sm:aspect-[16/9] lg:aspect-[21/9]'
+            }`}
+          >
             {isPlaying ? (
               <>
                 <iframe
@@ -61,48 +67,49 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
               /* Poster State with Editorial Text Overlay on Page Load */
               <div
                 onClick={() => setIsPlaying(true)}
-                className="relative w-full h-full cursor-pointer"
+                className="relative w-full h-full min-h-[380px] sm:min-h-0 cursor-pointer flex flex-col justify-between p-5 sm:p-7 md:p-8"
               >
                 <img
                   src={featuredReel.stillUrl}
                   alt="Duane Henry dramatic performance"
-                  className="w-full h-full object-cover object-center brightness-[0.7] transition-transform duration-1000 ease-out group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-center brightness-[0.75] transition-transform duration-1000 ease-out group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20" />
+                {/* Multilayer gradient for crystal clear contrast behind text & stage photo */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/25 pointer-events-none" />
 
                 {/* Top Bar on Reel Card */}
-                <div className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-300">
-                  <span className="bg-[#070c0d]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[#c5a059]">
+                <div className="relative z-10 flex items-center justify-between text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-300">
+                  <span className="bg-[#070c0d]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[#c5a059] text-[10px] sm:text-[11px]">
                     {featuredReel.badge}
                   </span>
-                  <span className="hidden sm:inline-block text-zinc-400 font-medium">
+                  <span className="text-zinc-400 font-medium text-[10px] sm:text-[11px]">
                     {featuredReel.location}
                   </span>
                 </div>
 
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#c5a059] transition-all duration-300">
-                    <Play className="w-6 sm:w-7 h-6 sm:h-7 fill-current ml-1" />
+                {/* Play Button Overlay - naturally separated in flex flow so it never collides with text */}
+                <div className="relative z-10 my-auto py-4 flex items-center justify-center pointer-events-none">
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#c5a059] transition-all duration-300">
+                    <Play className="w-5 h-5 sm:w-7 sm:h-7 fill-current ml-0.5" />
                   </div>
                 </div>
 
                 {/* Bottom Bar & Description */}
-                <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="max-w-2xl">
-                    <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-1.5">
+                    <div className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-1 sm:mb-1.5">
                       {featuredReel.subheading}
                     </div>
-                    <h3 className="font-sans font-bold text-[22px] sm:text-[32px] md:text-[36px] text-white leading-tight">
+                    <h3 className="font-sans font-bold text-[20px] sm:text-[28px] md:text-[34px] text-white leading-tight">
                       {featuredReel.title}
                     </h3>
-                    <p className="mt-2 text-[13px] sm:text-[15px] leading-relaxed text-zinc-300 font-normal line-clamp-2 sm:line-clamp-none">
+                    <p className="mt-1 sm:mt-2 text-[12px] sm:text-[14px] leading-relaxed text-zinc-300 font-normal line-clamp-2 sm:line-clamp-none">
                       {featuredReel.description}
                     </p>
                   </div>
 
-                  <div className="flex-shrink-0">
+                  <div className="hidden sm:block flex-shrink-0">
                     <button
                       type="button"
                       onClick={(e) => {
