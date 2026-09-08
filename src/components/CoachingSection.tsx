@@ -73,7 +73,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                   {sessionLocations.text}
                 </p>
                 <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-zinc-500">
-                  <span>Worldwide Zoom HD</span>
+                  <span>Online / In Person</span>
                   <span>London &amp; LA In-Person</span>
                 </div>
               </div>
@@ -93,11 +93,10 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
               return (
                 <ScrollReveal key={item.id} delay={0.1 + idx * 0.08}>
                   <div
-                    className={`rounded-2xl transition-all duration-300 overflow-hidden border ${
-                      isOpen
+                    className={`rounded-2xl transition-all duration-300 overflow-hidden border ${isOpen
                         ? 'bg-[#090f11] border-white/25 shadow-2xl'
                         : 'bg-[#090f11]/60 hover:bg-[#090f11] border-white/10 hover:border-white/20'
-                    }`}
+                      }`}
                   >
                     {/* Row Header */}
                     <button
@@ -120,9 +119,8 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                           {item.price}
                         </span>
                         <ChevronDown
-                          className={`w-4 h-4 text-zinc-400 transition-transform duration-300 ${
-                            isOpen ? 'rotate-180 text-white' : ''
-                          }`}
+                          className={`w-4 h-4 text-zinc-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : ''
+                            }`}
                         />
                       </div>
                     </button>

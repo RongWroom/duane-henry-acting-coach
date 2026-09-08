@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { COACHING_DATA } from '../data/portfolioData';
 import { ConsultationFormData } from '../types';
-import { Check, Send, ShieldCheck, Clock, MapPin, Mail, ArrowRight } from 'lucide-react';
+import { Check, ShieldCheck, Clock, MapPin, Mail, ArrowRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
 interface InquiriesSectionProps {
@@ -13,7 +12,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     fullName: '',
     email: '',
     link: '',
-    objective: 'Scene Study & Monologue Work',
+    objective: preselectedObjective || 'Private Coaching',
     notes: '',
   });
 
@@ -35,11 +34,6 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
       setSubmitted(true);
     }, 600);
   };
-
-  const focusOptions = [
-    ...COACHING_DATA.modules.map((m) => m.title),
-    'General Consultation',
-  ];
 
   return (
     <section
@@ -86,8 +80,8 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                   </span>
                 </h2>
 
-                <p className="mt-6 text-[16px] sm:text-[17px] leading-[1.75] text-zinc-400 font-normal">
-                  One-on-one dramatic coaching directly with Duane Henry. Tailored specifically to your active audition sides, upcoming pilot tests, or camera discipline. Available in person in London and Los Angeles or via encrypted high-definition virtual studio sessions.
+                <p className="mt-6 text-[16px] sm:text-[17px] leading-[1.75] text-zinc-300/90 font-normal">
+                  One-on-one dramatic coaching directly with Duane Henry. Tailored specifically to your upcoming auditions, pilot tests, and screen technique. Sessions are available in person in London and Los Angeles, or remotely worldwide via private video.
                 </p>
               </div>
             </ScrollReveal>
@@ -102,9 +96,9 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                     <span>Locations</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
-                    Covent Garden, London WC2B
+                    Covent Garden, London
                     <br />
-                    Beverly Hills, CA 90212
+                    Beverly Hills, Los Angeles
                   </div>
                 </div>
 
@@ -112,10 +106,10 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                 <div>
                   <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-[#c5a059]" />
-                    <span>Urgent Auditions</span>
+                    <span>Audition Deadlines</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
-                    24–48h rapid tape turnaround available upon request.
+                    24–48h rapid turnaround for urgent self-tapes and recalls.
                   </div>
                 </div>
 
@@ -126,7 +120,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                     <span>Confidentiality</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
-                    Strict NDA protection for unreleased scripts &amp; pilot sides.
+                    Strict privacy and NDA protection for unreleased scripts and sides.
                   </div>
                 </div>
 
@@ -169,56 +163,37 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
           {/* Right Column (7 cols): Bespoke Luxury Booking Module */}
           <div className="lg:col-span-7">
             <ScrollReveal delay={0.1}>
-              <div className="bg-[#090f11] border border-white/15 rounded-2xl p-7 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-md">
+              <div className="bg-[#091113]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-7 sm:p-10 shadow-2xl relative overflow-hidden">
                 {/* Subtle top golden ambient border */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c5a059]/40 to-transparent"
+                  className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c5a059]/40 to-transparent"
                   aria-hidden="true"
                 />
 
                 {!submitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-5">
                     {/* Header */}
                     <div>
                       <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#c5a059] mb-1.5">
-                        Private Intake
+                        Direct Inquiry
                       </div>
                       <h3 className="font-sans font-bold text-[24px] sm:text-[28px] text-white tracking-tight">
                         Request a Session
                       </h3>
                       <p className="text-[14px] text-zinc-400 font-normal leading-relaxed mt-1">
-                        Please provide your details, relevant spotlight or IMDb link, and what material you would like to focus on.
+                        Share your details and what you're working on. Duane will review your material and get back to you within 24–48 hours.
                       </p>
-                    </div>
 
-                    {/* Interactive Session Focus Pill Selector */}
-                    <div>
-                      <label className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2.5">
-                        Session Focus *
-                      </label>
-                      <div className="flex flex-wrap gap-2">
-                        {focusOptions.map((opt) => {
-                          const isSelected = formData.objective === opt;
-                          return (
-                            <button
-                              key={opt}
-                              type="button"
-                              onClick={() => setFormData({ ...formData, objective: opt })}
-                              className={`px-3.5 py-2 rounded-full text-[12px] font-medium transition-all duration-200 cursor-pointer ${
-                                isSelected
-                                  ? 'bg-[#c5a059] text-black font-semibold shadow-lg shadow-[#c5a059]/20 scale-[1.02]'
-                                  : 'bg-white/[0.04] text-zinc-300 border border-white/10 hover:border-white/30 hover:text-white hover:bg-white/[0.08]'
-                              }`}
-                            >
-                              {opt}
-                            </button>
-                          );
-                        })}
-                      </div>
+                      {preselectedObjective && preselectedObjective !== 'Scene Study & Monologue Work' && (
+                        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/25 text-[11px] font-medium text-[#c5a059]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                          <span>Selected Focus: {preselectedObjective}</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Form Row: Name & Email */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label
                           htmlFor="fullName"
@@ -233,7 +208,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="Your Name"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all"
+                          className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
                         />
                       </div>
 
@@ -251,7 +226,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="your.email@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all"
+                          className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -262,15 +237,15 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         htmlFor="link"
                         className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
                       >
-                        Spotlight / IMDb / Showreel Link <span className="text-zinc-500 font-normal">(Optional)</span>
+                        Spotlight / IMDb / Showreel Link <span className="text-zinc-500 font-normal lowercase tracking-normal">(optional)</span>
                       </label>
                       <input
                         id="link"
                         type="url"
-                        placeholder="https://www.spotlight.com/... or IMDb profile"
+                        placeholder="https://www.spotlight.com/... or IMDb link"
                         value={formData.link}
                         onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                        className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all"
+                        className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
                       />
                     </div>
 
@@ -280,34 +255,34 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         htmlFor="notes"
                         className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
                       >
-                        Material &amp; Upcoming Deadlines
+                        Material &amp; Audition Details
                       </label>
                       <textarea
                         id="notes"
                         rows={4}
-                        placeholder="Briefly describe your upcoming audition sides, project details, or deadlines..."
+                        placeholder="Tell Duane about your upcoming audition sides, project details, or deadlines..."
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all resize-none"
+                        className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200 resize-none"
                       />
                     </div>
 
                     {/* Submit Bar */}
-                    <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
+                    <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
                       <div className="flex items-center gap-2 text-[12px] text-zinc-400">
-                        <ShieldCheck className="w-4 h-4 text-[#c5a059]" />
-                        <span>Confidentiality &amp; NDA protected</span>
+                        <ShieldCheck className="w-4 h-4 text-[#c5a059] shrink-0" />
+                        <span>Confidential &amp; NDA protected</span>
                       </div>
 
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-xl disabled:opacity-50"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-lg hover:shadow-[#c5a059]/20 disabled:opacity-50"
                       >
                         {isSubmitting ? (
                           <>
                             <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                            <span>Submitting...</span>
+                            <span>Sending...</span>
                           </>
                         ) : (
                           <>
@@ -321,21 +296,21 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                 ) : (
                   /* Success State */
                   <div className="py-12 text-center space-y-6 animate-in fade-in duration-300">
-                    <div className="w-16 h-16 mx-auto rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
-                      <Check className="w-8 h-8" />
+                    <div className="w-14 h-14 mx-auto rounded-full bg-[#c5a059] text-black flex items-center justify-center shadow-xl shadow-[#c5a059]/20">
+                      <Check className="w-7 h-7 stroke-[2.5]" />
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059]">
                         Inquiry Received
                       </div>
-                      <h3 className="font-sans font-bold text-[28px] sm:text-[32px] text-white">
+                      <h3 className="font-sans font-bold text-[26px] sm:text-[30px] text-white">
                         Thank You, {formData.fullName}
                       </h3>
                       <p className="text-[15px] text-zinc-300 max-w-md mx-auto leading-relaxed font-normal">
-                        Your inquiry regarding <strong className="text-white">{formData.objective}</strong> has been received. Duane will review your notes and material and respond within 24–48 hours.
+                        Your inquiry has been received. Duane will personally review your details and respond within 24–48 hours.
                       </p>
                     </div>
-                    <div className="pt-4">
+                    <div className="pt-2">
                       <button
                         type="button"
                         onClick={() => {
@@ -344,13 +319,13 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                             fullName: '',
                             email: '',
                             link: '',
-                            objective: 'Scene Study & Monologue Work',
+                            objective: 'Private Coaching',
                             notes: '',
                           });
                         }}
-                        className="px-6 py-2.5 rounded-full border border-white/20 hover:border-white/50 text-white text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors"
+                        className="px-6 py-2.5 rounded-full border border-white/20 hover:border-white/50 text-white text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors cursor-pointer"
                       >
-                        Submit Another Inquiry
+                        Send Another Inquiry
                       </button>
                     </div>
                   </div>

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Play } from 'lucide-react';
 import { SELECTED_WORKS_DATA } from '../data/portfolioData';
 import { ScrollReveal } from './ScrollReveal';
 
 interface WorksSectionProps {
-  onWatchReel: () => void;
+  onWatchReel?: () => void;
 }
 
-export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
-  const { featuredReel, credits, sectionNumber, sectionTitle, subtitle } = SELECTED_WORKS_DATA;
+export const WorksSection: React.FC<WorksSectionProps> = () => {
+  const { credits, sectionNumber, sectionTitle, subtitle } = SELECTED_WORKS_DATA;
 
   return (
     <section
@@ -34,61 +33,16 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
           </div>
         </ScrollReveal>
 
-        {/* Featured Reel Card */}
+        {/* Featured Reel Frame with Vimeo Embed */}
         <ScrollReveal delay={0.1}>
-          <div
-            onClick={onWatchReel}
-            className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl bg-[#090f11] overflow-hidden group cursor-pointer border border-white/15 shadow-2xl shadow-black/80 mb-14 transition-all duration-300 hover:border-white/30"
-          >
-            <img
-              src={featuredReel.stillUrl}
-              alt="Duane Henry dramatic performance"
-              className="w-full h-full object-cover object-center brightness-[0.7] transition-transform duration-1000 ease-out group-hover:scale-105"
+          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl bg-black overflow-hidden border border-white/15 shadow-2xl shadow-black/80 mb-14">
+            <iframe
+              src="https://player.vimeo.com/video/1206826083?h=560a2894c0&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+              className="absolute inset-0 w-full h-full border-0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="Duane Henry - Demo Reel 2026"
             />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20" />
-
-            {/* Top Bar on Reel Card */}
-            <div className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-300">
-              <span className="bg-[#070c0d]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[#c5a059]">
-                {featuredReel.badge}
-              </span>
-              <span className="hidden sm:inline-block text-zinc-400 font-medium">
-                {featuredReel.location}
-              </span>
-            </div>
-
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#c5a059] transition-all duration-300">
-                <Play className="w-6 sm:w-7 h-6 sm:h-7 fill-current ml-1" />
-              </div>
-            </div>
-
-            {/* Bottom Bar & Description */}
-            <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div className="max-w-2xl">
-                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-1.5">
-                  {featuredReel.subheading}
-                </div>
-                <h3 className="font-sans font-bold text-[22px] sm:text-[32px] md:text-[36px] text-white leading-tight">
-                  {featuredReel.title}
-                </h3>
-                <p className="mt-2 text-[13px] sm:text-[15px] leading-relaxed text-zinc-300 font-normal line-clamp-2 sm:line-clamp-none">
-                  {featuredReel.description}
-                </p>
-              </div>
-
-              <div className="flex-shrink-0">
-                <button
-                  type="button"
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-200 border border-white/20"
-                >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Play Reel</span>
-                </button>
-              </div>
-            </div>
           </div>
         </ScrollReveal>
 

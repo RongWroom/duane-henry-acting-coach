@@ -37,7 +37,12 @@ export default function App() {
   };
 
   const handleOpenReel = () => {
-    setReelModalOpen(true);
+    const el = document.getElementById('works');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setReelModalOpen(true);
+    }
   };
 
   return (
