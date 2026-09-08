@@ -56,11 +56,11 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[#f7f3ed] border border-[#DDD5C7] shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-surface-container-low border border-sand shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-6 right-6 text-[#8C8275] hover:text-[#1A1715] transition-colors"
+          className="absolute top-6 right-6 text-muted-taupe hover:text-deep-espresso transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -68,13 +68,13 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
         {!submitted ? (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#8C8275] mb-1.5">
+              <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-muted-taupe mb-1.5">
                 Private Conservatory Admissions
               </div>
-              <h3 className="font-serif text-[28px] sm:text-[34px] text-[#1A1715] leading-tight mb-2">
+              <h3 className="font-serif text-[28px] sm:text-[34px] text-deep-espresso leading-tight mb-2">
                 Book Studio Consultation
               </h3>
-              <p className="text-[13px] sm:text-[14px] text-[#8C8275] font-light leading-relaxed">
+              <p className="text-[13px] sm:text-[14px] text-muted-taupe font-light leading-relaxed">
                 Direct one-on-one sessions in Soho, London, West Hollywood, or via dedicated 4K
                 calibrated virtual streams.
               </p>
@@ -84,7 +84,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               <div>
                 <label
                   htmlFor="modal-fullName"
-                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-[#8C8275] mb-1.5"
+                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-taupe mb-1.5"
                 >
                   Full Name *
                 </label>
@@ -95,14 +95,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="e.g. Eleanor Sterling"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-transparent border-b border-[#8C8275] focus:border-[#1A1715] py-2 text-[15px] text-[#1A1715] placeholder:text-[#8C8275]/50 focus:outline-none transition-colors"
+                  className="w-full bg-transparent border-b border-muted-taupe focus:border-deep-espresso py-2 text-[15px] text-deep-espresso placeholder:text-muted-taupe/50 focus:outline-none transition-colors"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="modal-email"
-                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-[#8C8275] mb-1.5"
+                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-taupe mb-1.5"
                 >
                   Email Address *
                 </label>
@@ -113,14 +113,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="eleanor@talentagency.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-transparent border-b border-[#8C8275] focus:border-[#1A1715] py-2 text-[15px] text-[#1A1715] placeholder:text-[#8C8275]/50 focus:outline-none transition-colors"
+                  className="w-full bg-transparent border-b border-muted-taupe focus:border-deep-espresso py-2 text-[15px] text-deep-espresso placeholder:text-muted-taupe/50 focus:outline-none transition-colors"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="modal-link"
-                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-[#8C8275] mb-1.5"
+                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-taupe mb-1.5"
                 >
                   Spotlight / IMDb / Showreel Link
                 </label>
@@ -130,14 +130,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="https://www.spotlight.com/..."
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
-                  className="w-full bg-transparent border-b border-[#8C8275] focus:border-[#1A1715] py-2 text-[15px] text-[#1A1715] placeholder:text-[#8C8275]/50 focus:outline-none transition-colors"
+                  className="w-full bg-transparent border-b border-muted-taupe focus:border-deep-espresso py-2 text-[15px] text-deep-espresso placeholder:text-muted-taupe/50 focus:outline-none transition-colors"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="modal-objective"
-                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-[#8C8275] mb-1.5"
+                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-taupe mb-1.5"
                 >
                   Coaching Module *
                 </label>
@@ -146,14 +146,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   required
                   value={objective}
                   onChange={(e) => setObjective(e.target.value)}
-                  className="w-full bg-transparent border-b border-[#8C8275] focus:border-[#1A1715] py-2 text-[15px] text-[#1A1715] focus:outline-none transition-colors cursor-pointer"
+                  className="w-full bg-transparent border-b border-muted-taupe focus:border-deep-espresso py-2 text-[15px] text-deep-espresso focus:outline-none transition-colors cursor-pointer"
                 >
                   {COACHING_DATA.modules.map((m) => (
-                    <option key={m.id} value={m.title} className="bg-[#f7f3ed]">
+                    <option key={m.id} value={m.title} className="bg-surface-container-low">
                       {m.title} ({m.price})
                     </option>
                   ))}
-                  <option value="General Consultation" className="bg-[#f7f3ed]">
+                  <option value="General Consultation" className="bg-surface-container-low">
                     General Industry Consultation
                   </option>
                 </select>
@@ -162,7 +162,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               <div>
                 <label
                   htmlFor="modal-notes"
-                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-[#8C8275] mb-1.5"
+                  className="block text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-taupe mb-1.5"
                 >
                   Notes on Current Material or Roles
                 </label>
@@ -172,19 +172,19 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   placeholder="Upcoming callback or specific text you wish to work on..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-transparent border-b border-[#8C8275] focus:border-[#1A1715] py-2 text-[15px] text-[#1A1715] placeholder:text-[#8C8275]/50 focus:outline-none transition-colors resize-none"
+                  className="w-full bg-transparent border-b border-muted-taupe focus:border-deep-espresso py-2 text-[15px] text-deep-espresso placeholder:text-muted-taupe/50 focus:outline-none transition-colors resize-none"
                 />
               </div>
             </div>
 
             <div className="pt-4 flex items-center justify-between gap-4">
-              <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#8C8275]">
+              <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-muted-taupe">
                 Strict Actor-Mentor Confidentiality
               </span>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-7 py-3 bg-[#1A1715] hover:bg-[#5A5D4F] text-[#FDFCF7] text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors flex items-center gap-2"
+                className="px-7 py-3 bg-deep-espresso hover:bg-dusty-olive text-bone-white text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors flex items-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -202,19 +202,19 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
           </form>
         ) : (
           <div className="py-8 text-center space-y-5 animate-in fade-in duration-300">
-            <div className="w-14 h-14 mx-auto rounded-full bg-[#1A1715] text-[#FDFCF7] flex items-center justify-center">
+            <div className="w-14 h-14 mx-auto rounded-full bg-deep-espresso text-bone-white flex items-center justify-center">
               <Check className="w-7 h-7" />
             </div>
-            <h4 className="font-serif text-[28px] text-[#1A1715]">Booking Requested</h4>
-            <p className="text-[14px] text-[#8C8275] max-w-sm mx-auto leading-relaxed">
+            <h4 className="font-serif text-[28px] text-deep-espresso">Booking Requested</h4>
+            <p className="text-[14px] text-muted-taupe max-w-sm mx-auto leading-relaxed">
               We have received your consultation reservation for{' '}
-              <strong className="text-[#1A1715]">{objective}</strong>. You will receive an onboarding
-              dossier and schedule confirmation at <strong className="text-[#1A1715]">{email}</strong>.
+              <strong className="text-deep-espresso">{objective}</strong>. You will receive an onboarding
+              dossier and schedule confirmation at <strong className="text-deep-espresso">{email}</strong>.
             </p>
             <div className="pt-4">
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 bg-[#1A1715] text-[#FDFCF7] text-[11px] font-semibold tracking-[0.16em] uppercase"
+                className="px-6 py-2.5 bg-deep-espresso text-bone-white text-[11px] font-semibold tracking-[0.16em] uppercase"
               >
                 Done
               </button>
