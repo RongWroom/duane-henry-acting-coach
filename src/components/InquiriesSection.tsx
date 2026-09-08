@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { COACHING_DATA } from '../data/portfolioData';
 import { ConsultationFormData } from '../types';
-import { Check, Send, ShieldCheck, Video, Clock, Sparkles } from 'lucide-react';
+import { Check, Send, ShieldCheck, Clock, MapPin, Mail, ArrowRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
 interface InquiriesSectionProps {
@@ -36,132 +36,188 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     }, 600);
   };
 
+  const focusOptions = [
+    ...COACHING_DATA.modules.map((m) => m.title),
+    'General Consultation',
+  ];
+
   return (
-    <section id="inquiries" className="bg-[#070c0d] py-20 md:py-28 border-t border-white/10 text-white relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14">
-        {/* Section Header */}
+    <section
+      id="inquiries"
+      className="bg-[#070c0d] py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-[#c5a059] selection:text-black"
+    >
+      {/* Cinematic dark teal & gold ambient background glows */}
+      <div
+        className="absolute -bottom-24 -left-20 w-[550px] h-[550px] bg-[#0e2c2b]/25 rounded-full blur-[160px] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-12 right-0 w-[450px] h-[450px] bg-[#c5a059]/5 rounded-full blur-[140px] pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14 relative z-10">
+        {/* Section Header Bar */}
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-3">
-              Direct Mentorship & Audition Prep
+          <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-16 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
+            <div className="flex items-center gap-3">
+              <span className="text-[#c5a059] font-mono">04</span>
+              <span className="w-8 h-[1px] bg-white/15" />
+              <span className="text-white">PRIVATE INQUIRIES &amp; BOOKING</span>
             </div>
-            <h2 className="font-sans font-bold text-white leading-tight text-[36px] sm:text-[52px] lg:text-[60px] tracking-tight">
-              Book a Private Session.
-            </h2>
-            <p className="mt-4 text-[15px] sm:text-[16px] text-zinc-400 font-normal max-w-xl mx-auto leading-relaxed">
-              One-on-one sessions tailored to your active audition sides, script analysis, or camera technique. Available online worldwide or in London &amp; Los Angeles.
-            </p>
+            <span className="text-zinc-500">LONDON • LOS ANGELES • VIRTUAL</span>
           </div>
         </ScrollReveal>
 
-        {/* Balanced 12-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
-          {/* Left Column (5 cols): What to Expect & Session Preparation */}
-          <div className="lg:col-span-5 flex flex-col space-y-6">
-            <ScrollReveal delay={0.1}>
-              <div className="bg-[#0f1a1c] border border-white/10 rounded-2xl p-7 sm:p-8 space-y-6">
+        {/* Editorial 12-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column (5 cols): Editorial Copy & 2x2 Metadata Grid */}
+          <div className="lg:col-span-5 flex flex-col space-y-8">
+            <ScrollReveal delay={0.05}>
+              <div>
+                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-4">
+                  Direct Mentorship &amp; Audition Prep
+                </div>
+
+                <h2 className="font-sans font-bold tracking-tight text-white leading-[1.04] text-[38px] sm:text-[48px] lg:text-[54px] xl:text-[58px]">
+                  RESERVE YOUR
+                  <span className="block font-serif font-normal italic text-zinc-300 text-[32px] sm:text-[40px] lg:text-[46px] xl:text-[50px] mt-1.5">
+                    Private Session.
+                  </span>
+                </h2>
+
+                <p className="mt-6 text-[16px] sm:text-[17px] leading-[1.75] text-zinc-400 font-normal">
+                  One-on-one dramatic coaching directly with Duane Henry. Tailored specifically to your active audition sides, upcoming pilot tests, or camera discipline. Available in person in London and Los Angeles or via encrypted high-definition virtual studio sessions.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* 2x2 Metadata Grid matching Footer layout */}
+            <ScrollReveal delay={0.15}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-6 py-8 border-y border-white/10">
+                {/* LOCATIONS */}
                 <div>
-                  <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-2 flex items-center gap-2">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>The Session Experience</span>
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <span>Locations</span>
                   </div>
-                  <h3 className="font-sans font-bold text-[22px] text-white">
-                    What to Expect
-                  </h3>
-                  <p className="text-[14px] text-zinc-400 leading-relaxed font-normal mt-2">
-                    Every session is confidential, direct, and tailored to give you tangible breakthrough in your performance.
+                  <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
+                    Covent Garden, London WC2B
+                    <br />
+                    Beverly Hills, CA 90212
+                  </div>
+                </div>
+
+                {/* URGENT CASTING */}
+                <div>
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <span>Urgent Auditions</span>
+                  </div>
+                  <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
+                    24–48h rapid tape turnaround available upon request.
+                  </div>
+                </div>
+
+                {/* CONFIDENTIALITY */}
+                <div>
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <span>Confidentiality</span>
+                  </div>
+                  <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
+                    Strict NDA protection for unreleased scripts &amp; pilot sides.
+                  </div>
+                </div>
+
+                {/* DIRECT EMAIL */}
+                <div>
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <span>Direct Inquiries</span>
+                  </div>
+                  <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
+                    <a
+                      href="mailto:coaching@duanehenry.com"
+                      className="hover:text-[#c5a059] transition-colors underline-offset-4 hover:underline"
+                    >
+                      coaching@duanehenry.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Duane's Philosophy Quote */}
+            <ScrollReveal delay={0.25}>
+              <div className="flex items-start gap-4 pt-1">
+                <div className="w-10 h-10 rounded-full border border-white/20 bg-white/[0.04] flex items-center justify-center text-[#c5a059] shrink-0 font-serif italic text-[20px]">
+                  &ldquo;
+                </div>
+                <div>
+                  <p className="font-serif italic text-[14px] sm:text-[15px] leading-[1.6] text-zinc-300">
+                    Acting is not about pretending; it is about uncovering the undeniable truth under intense pressure.
                   </p>
-                </div>
-
-                <div className="space-y-4 pt-1">
-                  {/* Step 1 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[12px] font-bold text-zinc-300 shrink-0">
-                      01
-                    </div>
-                    <div>
-                      <div className="text-[14px] font-semibold text-white">
-                        Sides & Script Deconstruction
-                      </div>
-                      <p className="text-[13px] text-zinc-400 leading-relaxed mt-0.5">
-                        Break down scene beats, discover hidden subtext, and establish truthful point-of-view before the camera rolls.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Step 2 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[12px] font-bold text-zinc-300 shrink-0">
-                      02
-                    </div>
-                    <div>
-                      <div className="text-[14px] font-semibold text-white">
-                        Live Take-by-Take Camera Direction
-                      </div>
-                      <p className="text-[13px] text-zinc-400 leading-relaxed mt-0.5">
-                        Work real-time with Duane to calibrate eye-lines, eliminate physical mannerisms, and build magnetic stillness.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Step 3 */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[12px] font-bold text-zinc-300 shrink-0">
-                      03
-                    </div>
-                    <div>
-                      <div className="text-[14px] font-semibold text-white">
-                        Strict Industry Confidentiality
-                      </div>
-                      <p className="text-[13px] text-zinc-400 leading-relaxed mt-0.5">
-                        All pilot sides, studio scripts, and unreleased scenes remain 100% confidential under standard NDA protocols.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Urgent casting notice */}
-                <div className="pt-4 border-t border-white/10 flex items-center gap-3 text-[13px] text-zinc-400">
-                  <Clock className="w-4 h-4 text-[#c5a059] shrink-0" />
-                  <span>
-                    Urgent tape due within 24h? Note your deadline in the form for priority scheduling.
+                  <span className="block text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-500 mt-2">
+                    — Duane Henry
                   </span>
                 </div>
               </div>
             </ScrollReveal>
-
-            {/* Duane's Quote Badge */}
-            <ScrollReveal delay={0.2}>
-              <div className="bg-white/[0.02] border border-white/10 rounded-xl p-5">
-                <blockquote className="text-[13px] italic text-zinc-300 leading-relaxed">
-                  &ldquo;Acting is not about pretending; it is about uncovering the undeniable truth under intense pressure.&rdquo;
-                </blockquote>
-                <div className="text-[11px] font-semibold tracking-[0.16em] uppercase text-[#c5a059] mt-2">
-                  — Duane Henry
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
 
-          {/* Right Column (7 cols): Clean Booking Form */}
+          {/* Right Column (7 cols): Bespoke Luxury Booking Module */}
           <div className="lg:col-span-7">
-            <ScrollReveal delay={0.15}>
-              <div className="bg-[#0f1a1c] border border-white/10 rounded-2xl p-7 sm:p-10 shadow-2xl">
+            <ScrollReveal delay={0.1}>
+              <div className="bg-[#090f11] border border-white/15 rounded-2xl p-7 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-md">
+                {/* Subtle top golden ambient border */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c5a059]/40 to-transparent"
+                  aria-hidden="true"
+                />
+
                 {!submitted ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Header */}
                     <div>
                       <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#c5a059] mb-1.5">
-                        Session Inquiries
+                        Private Intake
                       </div>
-                      <h3 className="font-sans font-bold text-[24px] sm:text-[28px] text-white mb-2">
-                        Request a Coaching Session
+                      <h3 className="font-sans font-bold text-[24px] sm:text-[28px] text-white tracking-tight">
+                        Request a Session
                       </h3>
-                      <p className="text-[14px] text-zinc-400 font-normal leading-relaxed">
+                      <p className="text-[14px] text-zinc-400 font-normal leading-relaxed mt-1">
                         Please provide your details, relevant spotlight or IMDb link, and what material you would like to focus on.
                       </p>
                     </div>
 
-                    {/* Form Row 1: Name & Email */}
+                    {/* Interactive Session Focus Pill Selector */}
+                    <div>
+                      <label className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2.5">
+                        Session Focus *
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {focusOptions.map((opt) => {
+                          const isSelected = formData.objective === opt;
+                          return (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, objective: opt })}
+                              className={`px-3.5 py-2 rounded-full text-[12px] font-medium transition-all duration-200 cursor-pointer ${
+                                isSelected
+                                  ? 'bg-[#c5a059] text-black font-semibold shadow-lg shadow-[#c5a059]/20 scale-[1.02]'
+                                  : 'bg-white/[0.04] text-zinc-300 border border-white/10 hover:border-white/30 hover:text-white hover:bg-white/[0.08]'
+                              }`}
+                            >
+                              {opt}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Form Row: Name & Email */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <label
@@ -177,7 +233,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="Your Name"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
+                          className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all"
                         />
                       </div>
 
@@ -195,76 +251,49 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="your.email@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
+                          className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all"
                         />
                       </div>
                     </div>
 
-                    {/* Form Row 2: Link & Objective */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label
-                          htmlFor="link"
-                          className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
-                        >
-                          Spotlight / IMDb / Showreel Link
-                        </label>
-                        <input
-                          id="link"
-                          type="url"
-                          placeholder="https://www.spotlight.com/..."
-                          value={formData.link}
-                          onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                          className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#c5a059] transition-colors"
-                        />
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="objective"
-                          className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
-                        >
-                          Session Focus *
-                        </label>
-                        <select
-                          id="objective"
-                          required
-                          value={formData.objective}
-                          onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
-                          className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[14px] text-white focus:outline-none focus:border-[#c5a059] transition-colors cursor-pointer"
-                        >
-                          {COACHING_DATA.modules.map((mod) => (
-                            <option key={mod.id} value={mod.title} className="bg-[#132022]">
-                              {mod.title} ({mod.price})
-                            </option>
-                          ))}
-                          <option value="General Consultation" className="bg-[#132022]">
-                            General Consultation
-                          </option>
-                        </select>
-                      </div>
+                    {/* Form Row: Spotlight / IMDb Link */}
+                    <div>
+                      <label
+                        htmlFor="link"
+                        className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
+                      >
+                        Spotlight / IMDb / Showreel Link <span className="text-zinc-500 font-normal">(Optional)</span>
+                      </label>
+                      <input
+                        id="link"
+                        type="url"
+                        placeholder="https://www.spotlight.com/... or IMDb profile"
+                        value={formData.link}
+                        onChange={(e) => setFormData({ ...formData, link: e.target.value })}
+                        className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all"
+                      />
                     </div>
 
-                    {/* Form Row 3: Notes */}
+                    {/* Form Row: Material & Upcoming Deadlines */}
                     <div>
                       <label
                         htmlFor="notes"
                         className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
                       >
-                        Material & Upcoming Deadlines
+                        Material &amp; Upcoming Deadlines
                       </label>
                       <textarea
                         id="notes"
                         rows={4}
-                        placeholder="Tell Duane briefly about your current audition sides, production timelines, or specific goals..."
+                        placeholder="Briefly describe your upcoming audition sides, project details, or deadlines..."
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        className="w-full bg-[#132022] border border-white/10 rounded-lg px-4 py-3 text-[14px] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#c5a059] transition-colors resize-none"
+                        className="w-full bg-white/[0.03] border border-white/15 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all resize-none"
                       />
                     </div>
 
                     {/* Submit Bar */}
-                    <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-white/10">
+                    <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
                       <div className="flex items-center gap-2 text-[12px] text-zinc-400">
                         <ShieldCheck className="w-4 h-4 text-[#c5a059]" />
                         <span>Confidentiality &amp; NDA protected</span>
@@ -273,17 +302,17 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-black hover:bg-[#c5a059] text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-xl disabled:opacity-50"
                       >
                         {isSubmitting ? (
                           <>
                             <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                            <span>Sending...</span>
+                            <span>Submitting...</span>
                           </>
                         ) : (
                           <>
-                            <Send className="w-3.5 h-3.5" />
-                            <span>Send Inquiry</span>
+                            <span>Request Session</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
                           </>
                         )}
                       </button>
@@ -291,21 +320,38 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                   </form>
                 ) : (
                   /* Success State */
-                  <div className="py-10 text-center space-y-5 animate-in fade-in duration-300">
-                    <div className="w-14 h-14 mx-auto rounded-full bg-white text-black flex items-center justify-center">
-                      <Check className="w-7 h-7" />
+                  <div className="py-12 text-center space-y-6 animate-in fade-in duration-300">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
+                      <Check className="w-8 h-8" />
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059]">
                         Inquiry Received
                       </div>
-                      <h3 className="font-sans font-bold text-[28px] text-white">
+                      <h3 className="font-sans font-bold text-[28px] sm:text-[32px] text-white">
                         Thank You, {formData.fullName}
                       </h3>
-                      <p className="text-[15px] text-zinc-300 max-w-md mx-auto leading-relaxed">
-                        Your inquiry regarding <strong>{formData.objective}</strong> has been received.
-                        Duane will review your sides and details and get back to you within 24–48 hours.
+                      <p className="text-[15px] text-zinc-300 max-w-md mx-auto leading-relaxed font-normal">
+                        Your inquiry regarding <strong className="text-white">{formData.objective}</strong> has been received. Duane will review your notes and material and respond within 24–48 hours.
                       </p>
+                    </div>
+                    <div className="pt-4">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            fullName: '',
+                            email: '',
+                            link: '',
+                            objective: 'Scene Study & Monologue Work',
+                            notes: '',
+                          });
+                        }}
+                        className="px-6 py-2.5 rounded-full border border-white/20 hover:border-white/50 text-white text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors"
+                      >
+                        Submit Another Inquiry
+                      </button>
                     </div>
                   </div>
                 )}

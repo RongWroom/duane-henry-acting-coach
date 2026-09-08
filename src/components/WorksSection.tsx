@@ -11,11 +11,20 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
   const { featuredReel, credits, sectionNumber, sectionTitle, subtitle } = SELECTED_WORKS_DATA;
 
   return (
-    <section id="works" className="bg-[#070c0d] py-20 md:py-28 border-t border-white/10 text-white relative">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14">
-        {/* Section Header */}
+    <section
+      id="works"
+      className="bg-[#070c0d] py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-[#c5a059] selection:text-black"
+    >
+      {/* Subtle ambient lighting */}
+      <div
+        className="absolute top-1/4 -right-20 w-[450px] h-[450px] bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14 relative z-10">
+        {/* Section Header Bar */}
         <ScrollReveal>
-          <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-12 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
+          <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-16 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
             <div className="flex items-center gap-3">
               <span className="text-[#c5a059] font-mono">{sectionNumber}</span>
               <span className="w-8 h-[1px] bg-white/15" />
@@ -29,7 +38,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
         <ScrollReveal delay={0.1}>
           <div
             onClick={onWatchReel}
-            className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl bg-zinc-950 overflow-hidden group cursor-pointer border border-white/10 shadow-2xl mb-12 transition-all duration-300 hover:border-white/25"
+            className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl bg-[#090f11] overflow-hidden group cursor-pointer border border-white/15 shadow-2xl shadow-black/80 mb-14 transition-all duration-300 hover:border-white/30"
           >
             <img
               src={featuredReel.stillUrl}
@@ -37,14 +46,14 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
               className="w-full h-full object-cover object-center brightness-[0.7] transition-transform duration-1000 ease-out group-hover:scale-105"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20" />
 
             {/* Top Bar on Reel Card */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-300">
-              <span className="bg-[#070c0d]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
+              <span className="bg-[#070c0d]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[#c5a059]">
                 {featuredReel.badge}
               </span>
-              <span className="hidden sm:inline-block text-zinc-400">
+              <span className="hidden sm:inline-block text-zinc-400 font-medium">
                 {featuredReel.location}
               </span>
             </div>
@@ -65,7 +74,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
                 <h3 className="font-sans font-bold text-[22px] sm:text-[32px] md:text-[36px] text-white leading-tight">
                   {featuredReel.title}
                 </h3>
-                <p className="mt-1.5 text-[13px] sm:text-[15px] leading-relaxed text-zinc-300 font-normal line-clamp-2 sm:line-clamp-none">
+                <p className="mt-2 text-[13px] sm:text-[15px] leading-relaxed text-zinc-300 font-normal line-clamp-2 sm:line-clamp-none">
                   {featuredReel.description}
                 </p>
               </div>
@@ -73,7 +82,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
               <div className="flex-shrink-0">
                 <button
                   type="button"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-[0.14em] uppercase transition-colors border border-white/20"
+                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-200 border border-white/20"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
                   <span>Play Reel</span>
@@ -87,18 +96,18 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {credits.map((credit) => (
             <StaggerItem key={credit.id}>
-              <div className="p-6 rounded-2xl bg-[#0f1a1c] border border-white/10 hover:border-white/25 hover:bg-[#152427] transition-all duration-300 flex flex-col justify-between h-full group">
+              <div className="p-7 rounded-2xl bg-[#090f11] border border-white/15 hover:border-white/30 hover:bg-[#0c1517] transition-all duration-300 flex flex-col justify-between h-full group shadow-lg">
                 <div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-3.5">
                     <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#c5a059]">
                       {credit.category}
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
                       {credit.accoladeOrEpisodes}
                     </span>
                   </div>
 
-                  <h4 className="font-sans font-bold text-[20px] sm:text-[22px] text-white group-hover:text-[#c5a059] transition-colors leading-snug mb-2">
+                  <h4 className="font-sans font-bold text-[20px] sm:text-[22px] text-white group-hover:text-[#c5a059] transition-colors leading-snug mb-2.5">
                     {credit.title}
                   </h4>
                   <p className="text-[13px] leading-relaxed text-zinc-400 font-normal">
@@ -106,7 +115,7 @@ export const WorksSection: React.FC<WorksSectionProps> = ({ onWatchReel }) => {
                   </p>
                 </div>
 
-                <div className="pt-5 mt-5 border-t border-white/10 text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-500">
+                <div className="pt-6 mt-6 border-t border-white/10 text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-500">
                   {credit.networkOrStudio}
                 </div>
               </div>
