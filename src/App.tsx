@@ -8,6 +8,7 @@ import { InquiriesSection } from './components/InquiriesSection';
 import { Footer } from './components/Footer';
 import { ReelModal } from './components/ReelModal';
 import { ConsultationModal } from './components/ConsultationModal';
+import { SpotlightCursor } from './components/SpotlightCursor';
 
 export default function App() {
   const [reelModalOpen, setReelModalOpen] = useState(false);
@@ -41,6 +42,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#0b0b0e] text-white font-sans selection:bg-[#c5a059] selection:text-black">
+      {/* Circular Inverting Mouse Follower */}
+      <SpotlightCursor />
+
       {/* Navigation Header */}
       <Header onOpenConsultation={handleOpenConsultation} />
 
