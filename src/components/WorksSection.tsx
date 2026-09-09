@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Play, X, ArrowUpRight } from 'lucide-react';
 import { SELECTED_WORKS_DATA } from '../data/portfolioData';
 import { ScrollReveal } from './ScrollReveal';
@@ -10,6 +10,56 @@ interface WorksSectionProps {
 export const WorksSection: React.FC<WorksSectionProps> = () => {
   const { featuredReel, credits, sectionNumber, sectionTitle, subtitle } = SELECTED_WORKS_DATA;
   const [isPlaying, setIsPlaying] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const isHoveredRef = useRef(false);
+
+  // 4 cycles ensure a continuous, uninterrupted marquee track across all display sizes
+  const marqueeItems = [...credits, ...credits, ...credits, ...credits];
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    // Respect reduced motion settings
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) return;
+
+    let animationFrameId: number;
+    let lastTime = performance.now();
+    let currentX = 0;
+    const baseSpeed = 48; // Cinematic, smooth pace (~48px/sec)
+    let currentSpeed = baseSpeed;
+
+    const animate = (time: number) => {
+      const dt = Math.min((time - lastTime) / 1000, 0.1);
+      lastTime = time;
+
+      // Soft deceleration on hover, gentle acceleration back up on unhover
+      const targetSpeed = isHoveredRef.current ? 0 : baseSpeed;
+      const lerpFactor = isHoveredRef.current ? 4.2 : 2.4;
+      currentSpeed += (targetSpeed - currentSpeed) * Math.min(lerpFactor * dt, 1);
+
+      currentX -= currentSpeed * dt;
+
+      // Seamless infinite loop based on single cycle width (1/4th of 4 repetitions)
+      const totalWidth = track.scrollWidth;
+      const cycleWidth = totalWidth / 4;
+
+      if (cycleWidth > 0 && Math.abs(currentX) >= cycleWidth) {
+        currentX += cycleWidth;
+      }
+
+      track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [credits]);
 
   return (
     <section
@@ -153,11 +203,28 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
               aria-hidden="true"
             />
 
-            {/* Scrolling Track Container */}
-            <div className="overflow-hidden pt-4 pb-12">
-              <div className="animate-marquee flex gap-6 items-center">
-                {/* 16 Items (duplicate array for infinite seamless marquee loop) */}
-                {[...credits, ...credits].map((credit, idx) => {
+            {/* Scrolling Track Container with Soft Deceleration Hover */}
+            <div
+              className="overflow-hidden pt-4 pb-12 cursor-default"
+              onMouseEnter={() => {
+                isHoveredRef.current = true;
+              }}
+              onMouseLeave={() => {
+                isHoveredRef.current = false;
+              }}
+              onTouchStart={() => {
+                isHoveredRef.current = true;
+              }}
+              onTouchEnd={() => {
+                isHoveredRef.current = false;
+              }}
+            >
+              <div
+                ref={trackRef}
+                className="flex gap-6 items-center will-change-transform"
+                style={{ width: 'max-content' }}
+              >
+                {marqueeItems.map((credit, idx) => {
                   const isOffset = idx % 2 === 1;
                   return (
                     <div
