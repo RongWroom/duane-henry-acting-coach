@@ -12,7 +12,7 @@ import { SpotlightCursor } from './components/SpotlightCursor';
 export default function App() {
   const [reelModalOpen, setReelModalOpen] = useState(false);
   const [preselectedObjective, setPreselectedObjective] = useState<string>(
-    'Scene Study & Monologue Work'
+    'Scene Study & Monologues'
   );
 
   const handleExploreCoaching = () => {

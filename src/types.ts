@@ -12,7 +12,6 @@ export interface CurriculumModule {
   id: string;
   number: string;
   title: string;
-  price: string;
   description: string;
   focusAreas: string[];
   deliverables: string;

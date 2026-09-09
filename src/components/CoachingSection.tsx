@@ -114,12 +114,12 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                         </h3>
                       </div>
 
-                      <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
-                        <span className="text-[12px] font-semibold tracking-wider text-zinc-300">
-                          {item.price}
+                      <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+                        <span className="text-[11px] font-medium tracking-[0.14em] uppercase text-[#c5a059] opacity-0 group-hover:opacity-100 transition-opacity hidden sm:inline-block">
+                          {isOpen ? 'Close' : 'View Details'}
                         </span>
                         <ChevronDown
-                          className={`w-4 h-4 text-zinc-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : ''
+                          className={`w-4 h-4 text-zinc-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : 'group-hover:text-white'
                             }`}
                         />
                       </div>

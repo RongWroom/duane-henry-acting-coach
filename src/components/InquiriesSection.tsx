@@ -13,7 +13,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     fullName: '',
     email: '',
     link: '',
-    objective: preselectedObjective || 'Scene Study & Monologue Work',
+    objective: preselectedObjective || 'Scene Study & Monologues',
     notes: '',
   });
 
@@ -185,7 +185,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         Share your details and what you're working on. Duane will review your material and get back to you within 24–48 hours.
                       </p>
 
-                      {preselectedObjective && preselectedObjective !== 'Scene Study & Monologue Work' && (
+                      {preselectedObjective && preselectedObjective !== 'Scene Study & Monologues' && (
                         <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/25 text-[11px] font-medium text-[#c5a059]">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
                           <span>Selected Focus: {preselectedObjective}</span>
@@ -268,11 +268,11 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         >
                           {COACHING_DATA.modules.map((m) => (
                             <option key={m.id} value={m.title} className="bg-[#0c1517] text-white">
-                              {m.title} ({m.price})
+                              {m.title}
                             </option>
                           ))}
                           <option value="Urgent Audition / Self-Tape Callback" className="bg-[#0c1517] text-white">
-                            Urgent Audition / Self-Tape Callback (24–48h)
+                            Urgent Audition Prep (24–48h)
                           </option>
                           <option value="General Consultation & Mentorship" className="bg-[#0c1517] text-white">
                             General Consultation &amp; Mentorship

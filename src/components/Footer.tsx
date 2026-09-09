@@ -27,9 +27,8 @@ export const Footer: React.FC = () => {
 
   const sessionFocusList = [
     { label: 'Scene Study & Monologues', href: '#coaching' },
-    { label: 'Audition & Self-Tape Preparation', href: '#coaching' },
-    { label: 'Script Breakdown & Strategy', href: '#coaching' },
-    { label: 'On-Camera Discipline & Eye-Line', href: '#coaching' },
+    { label: 'Audition & Self-Tape Prep', href: '#coaching' },
+    { label: 'Career & Industry Strategy', href: '#coaching' },
   ];
 
   return (

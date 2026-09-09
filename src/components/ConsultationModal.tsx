@@ -149,7 +149,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 >
                   {COACHING_DATA.modules.map((m) => (
                     <option key={m.id} value={m.title} className="bg-[#132022]">
-                      {m.title} ({m.price})
+                      {m.title}
                     </option>
                   ))}
                   <option value="General Consultation" className="bg-[#132022]">
