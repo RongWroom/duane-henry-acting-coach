@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ConsultationFormData } from '../types';
-import { Check, ShieldCheck, Clock, MapPin, Mail, ArrowRight } from 'lucide-react';
+import { Check, ShieldCheck, Clock, MapPin, Mail, ArrowRight, ChevronDown } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { COACHING_DATA } from '../data/portfolioData';
 
 interface InquiriesSectionProps {
   preselectedObjective?: string;
@@ -12,7 +13,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     fullName: '',
     email: '',
     link: '',
-    objective: preselectedObjective || 'Private Coaching',
+    objective: preselectedObjective || 'Scene Study & Monologue Work',
     notes: '',
   });
 
@@ -249,6 +250,40 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                       />
                     </div>
 
+                    {/* Form Row: Session Focus */}
+                    <div>
+                      <label
+                        htmlFor="objective"
+                        className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
+                      >
+                        Session Focus *
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="objective"
+                          required
+                          value={formData.objective}
+                          onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
+                          className="w-full bg-[#0c1517] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-[#0f1b1e] rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200 cursor-pointer appearance-none pr-10"
+                        >
+                          {COACHING_DATA.modules.map((m) => (
+                            <option key={m.id} value={m.title} className="bg-[#0c1517] text-white">
+                              {m.title} ({m.price})
+                            </option>
+                          ))}
+                          <option value="Urgent Audition / Self-Tape Callback" className="bg-[#0c1517] text-white">
+                            Urgent Audition / Self-Tape Callback (24–48h)
+                          </option>
+                          <option value="General Consultation & Mentorship" className="bg-[#0c1517] text-white">
+                            General Consultation &amp; Mentorship
+                          </option>
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-400">
+                          <ChevronDown className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Form Row: Material & Upcoming Deadlines */}
                     <div>
                       <label
@@ -319,7 +354,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                             fullName: '',
                             email: '',
                             link: '',
-                            objective: 'Private Coaching',
+                            objective: 'Scene Study & Monologue Work',
                             notes: '',
                           });
                         }}

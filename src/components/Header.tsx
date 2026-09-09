@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface HeaderProps {
-  onOpenConsultation: () => void;
+  onBookSession?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
+export const Header: React.FC<HeaderProps> = ({ onBookSession }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -19,6 +19,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleBookClick = () => {
+    if (onBookSession) {
+      onBookSession();
+    } else {
+      const el = document.getElementById('inquiries');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const navLinks = [
     { label: 'The Craft', href: '#craft' },
@@ -67,8 +76,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
         {/* Right: Action CTA */}
         <div className="flex items-center space-x-3">
           <button
-            onClick={onOpenConsultation}
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-all duration-200"
+            onClick={handleBookClick}
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-all duration-200 cursor-pointer"
           >
             <span>Book a Session</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -103,9 +112,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenConsultation();
+                  handleBookClick();
                 }}
-                className="w-full py-3 rounded-full bg-white text-black text-[12px] font-bold tracking-[0.12em] uppercase"
+                className="w-full py-3 rounded-full bg-white text-black text-[12px] font-bold tracking-[0.12em] uppercase cursor-pointer"
               >
                 Book a Session
               </button>

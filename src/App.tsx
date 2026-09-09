@@ -7,12 +7,10 @@ import { CoachingSection } from './components/CoachingSection';
 import { InquiriesSection } from './components/InquiriesSection';
 import { Footer } from './components/Footer';
 import { ReelModal } from './components/ReelModal';
-import { ConsultationModal } from './components/ConsultationModal';
 import { SpotlightCursor } from './components/SpotlightCursor';
 
 export default function App() {
   const [reelModalOpen, setReelModalOpen] = useState(false);
-  const [consultationModalOpen, setConsultationModalOpen] = useState(false);
   const [preselectedObjective, setPreselectedObjective] = useState<string>(
     'Scene Study & Monologue Work'
   );
@@ -24,16 +22,16 @@ export default function App() {
     }
   };
 
-  const handleSelectModule = (moduleTitle: string) => {
-    setPreselectedObjective(moduleTitle);
+  const handleScrollToInquiries = () => {
     const inquiriesEl = document.getElementById('inquiries');
     if (inquiriesEl) {
       inquiriesEl.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleOpenConsultation = () => {
-    setConsultationModalOpen(true);
+  const handleSelectModule = (moduleTitle: string) => {
+    setPreselectedObjective(moduleTitle);
+    handleScrollToInquiries();
   };
 
   const handleOpenReel = () => {
@@ -51,7 +49,7 @@ export default function App() {
       <SpotlightCursor />
 
       {/* Navigation Header */}
-      <Header onOpenConsultation={handleOpenConsultation} />
+      <Header onBookSession={handleScrollToInquiries} />
 
       {/* Main Sections with Unified Flow */}
       <main>
@@ -59,7 +57,7 @@ export default function App() {
         <HeroSection
           onExploreCoaching={handleExploreCoaching}
           onWatchReel={handleOpenReel}
-          onBookSession={handleOpenConsultation}
+          onBookSession={handleScrollToInquiries}
         />
 
         {/* Biography */}
@@ -80,13 +78,6 @@ export default function App() {
 
       {/* Interactive Reel Modal */}
       <ReelModal isOpen={reelModalOpen} onClose={() => setReelModalOpen(false)} />
-
-      {/* Interactive Session Booking Modal */}
-      <ConsultationModal
-        isOpen={consultationModalOpen}
-        onClose={() => setConsultationModalOpen(false)}
-        preselectedObjective={preselectedObjective}
-      />
     </div>
   );
 }
