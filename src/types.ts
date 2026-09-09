@@ -6,6 +6,7 @@ export interface CreditItem {
   networkOrStudio: string;
   accoladeOrEpisodes: string;
   accentBorder: 'dark' | 'sand';
+  imdbUrl?: string;
 }
 
 export interface CurriculumModule {

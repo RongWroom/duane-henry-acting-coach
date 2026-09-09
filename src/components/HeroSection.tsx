@@ -48,9 +48,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <ScrollReveal delay={0.25}>
               <p className="mt-6 text-[16px] sm:text-[18px] leading-[1.75] text-zinc-400 font-normal max-w-xl">
                 Veteran actor of stage and screen (CBS&apos;s{' '}
-                <span className="text-zinc-200 font-medium">NCIS</span>, Marvel Studios&apos;{' '}
-                <span className="text-zinc-200 font-medium">Captain Marvel</span>). Offering focused,
-                one-on-one coaching for actors preparing for auditions, cold reads, and high-stakes
+                <a
+                  href="https://www.imdb.com/title/tt0364845/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-200 font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-700 hover:decoration-[#c5a059] transition-colors"
+                >
+                  NCIS
+                </a>
+                , Marvel Studios&apos;{' '}
+                <a
+                  href="https://www.imdb.com/title/tt4154664/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-200 font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-700 hover:decoration-[#c5a059] transition-colors"
+                >
+                  Captain Marvel
+                </a>
+                ). Offering focused, one-on-one coaching for actors preparing for auditions, cold reads, and high-stakes
                 on-camera work.
               </p>
             </ScrollReveal>
@@ -124,12 +139,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <span>Biography & Background</span>
           </a>
 
-          <div className="flex items-center gap-4 sm:gap-6 text-zinc-400">
-            <span>BAFTA Nominee</span>
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-zinc-400">
+            <a
+              href="https://en.wikipedia.org/wiki/Screen_Nation_Film_and_Television_Awards"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Screen Nation Nominee
+            </a>
             <span className="text-zinc-700">•</span>
-            <span>CBS NCIS</span>
+            <a
+              href="https://www.imdb.com/title/tt0364845/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              CBS NCIS
+            </a>
             <span className="text-zinc-700">•</span>
-            <span>Marvel Studios</span>
+            <a
+              href="https://www.imdb.com/title/tt4154664/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Marvel Studios
+            </a>
           </div>
         </div>
       </div>

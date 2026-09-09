@@ -53,11 +53,17 @@ export const BiographySection: React.FC = () => {
             <ScrollReveal delay={0.2}>
               <div className="bg-[#090f11] border border-white/15 rounded-2xl grid grid-cols-3 divide-x divide-white/10 p-6 text-center shadow-xl">
                 {BIOGRAPHY_DATA.metrics.map((metric) => (
-                  <div key={metric.label} className="px-2">
-                    <div className="font-sans font-bold text-[28px] sm:text-[34px] text-white leading-none">
+                  <div key={metric.label} className="px-2 flex flex-col justify-center">
+                    <div
+                      className={`font-sans font-bold text-white leading-tight ${
+                        metric.value.length > 6
+                          ? 'text-[16px] sm:text-[18px] lg:text-[20px]'
+                          : 'text-[28px] sm:text-[34px]'
+                      }`}
+                    >
                       {metric.value}
                     </div>
-                    <div className="mt-2.5 text-[9px] sm:text-[10px] font-semibold tracking-[0.16em] uppercase text-zinc-400">
+                    <div className="mt-2 text-[9px] sm:text-[10px] font-semibold tracking-[0.16em] uppercase text-zinc-400">
                       {metric.label}
                     </div>
                   </div>
@@ -82,15 +88,75 @@ export const BiographySection: React.FC = () => {
                 </h2>
 
                 <div className="space-y-5 text-[16px] leading-[1.8] text-zinc-300 font-normal">
-                  {BIOGRAPHY_DATA.paragraphs.map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
+                  <p>
+                    Born and raised in Birmingham, England, Duane Henry forged his craft in the gritty, disciplined trenches of British theatre and television, including the BBC&apos;s{' '}
+                    <a
+                      href="https://www.imdb.com/title/tt0241383/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-600 hover:decoration-[#c5a059] transition-colors"
+                    >
+                      Doctors
+                    </a>{' '}
+                    (earning a prestigious{' '}
+                    <a
+                      href="https://en.wikipedia.org/wiki/Screen_Nation_Film_and_Television_Awards"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-600 hover:decoration-[#c5a059] transition-colors"
+                    >
+                      Screen Nation Film &amp; TV Awards
+                    </a>{' '}
+                    nomination for Best Emerging Talent) and independent British features.
+                  </p>
+                  <p>
+                    His transition to American cinema caught worldwide attention when he was cast as MI6 Officer Clayton Reeves on the globally celebrated juggernaut{' '}
+                    <a
+                      href="https://www.imdb.com/title/tt0364845/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-600 hover:decoration-[#c5a059] transition-colors"
+                    >
+                      NCIS
+                    </a>{' '}
+                    across multiple seasons. He subsequently joined the Marvel Cinematic Universe in the blockbuster{' '}
+                    <a
+                      href="https://www.imdb.com/title/tt4154664/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-600 hover:decoration-[#c5a059] transition-colors"
+                    >
+                      Captain Marvel
+                    </a>
+                    .
+                  </p>
+                  <p>
+                    When Duane isn&apos;t filming, he will work directly with you through focused, one-on-one coaching sessions. He equips actors with practical, real-world camera tools—stripping away artificial mannerisms to uncover authentic, undeniable presence.
+                  </p>
                 </div>
               </div>
 
               {/* Verified Credentials Note */}
               <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11px] font-medium tracking-[0.16em] uppercase text-zinc-400">
-                <span>{BIOGRAPHY_DATA.credentials}</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href="https://www.sagaftra.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Screen Actors Guild (SAG-AFTRA)
+                  </a>
+                  <span>•</span>
+                  <a
+                    href="https://www.equity.org.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Equity UK
+                  </a>
+                </div>
                 <span className="text-[#c5a059]">London • Los Angeles</span>
               </div>
             </ScrollReveal>

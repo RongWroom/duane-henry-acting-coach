@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, X } from 'lucide-react';
+import { Play, X, ArrowUpRight } from 'lucide-react';
 import { SELECTED_WORKS_DATA } from '../data/portfolioData';
 import { ScrollReveal } from './ScrollReveal';
 
@@ -179,7 +179,19 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                         </div>
 
                         <h4 className="font-sans font-bold text-[19px] sm:text-[21px] text-white group-hover:text-[#c5a059] transition-colors leading-snug mb-2 line-clamp-1">
-                          {credit.title}
+                          {credit.imdbUrl ? (
+                            <a
+                              href={credit.imdbUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 hover:underline"
+                            >
+                              <span>{credit.title}</span>
+                              <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 text-[#c5a059] transition-opacity" />
+                            </a>
+                          ) : (
+                            credit.title
+                          )}
                         </h4>
                         <p className="text-[13px] leading-relaxed text-zinc-400 font-normal line-clamp-2">
                           {credit.details}
@@ -188,9 +200,22 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
 
                       <div className="pt-4 border-t border-white/10 text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-500 group-hover:text-zinc-400 transition-colors flex items-center justify-between">
                         <span>{credit.networkOrStudio}</span>
-                        <span className="text-[#c5a059]/40 group-hover:text-[#c5a059] text-[11px] transition-colors">
-                          ✦
-                        </span>
+                        {credit.imdbUrl ? (
+                          <a
+                            href={credit.imdbUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-400 hover:text-[#c5a059] transition-colors"
+                            title={`View ${credit.title} on IMDb`}
+                          >
+                            <span>IMDb</span>
+                            <ArrowUpRight className="w-3 h-3 text-[#c5a059]" />
+                          </a>
+                        ) : (
+                          <span className="text-[#c5a059]/40 group-hover:text-[#c5a059] text-[11px] transition-colors">
+                            ✦
+                          </span>
+                        )}
                       </div>
                     </div>
                   );

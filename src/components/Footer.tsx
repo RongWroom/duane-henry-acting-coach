@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Check, X, Shield, Lock, FileText } from 'lucide-react';
+import { ArrowUpRight, X, Shield, FileText } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [activeModal, setActiveModal] = useState<'terms' | 'privacy' | null>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setTimeout(() => {
-        setEmail('');
-      }, 2000);
-    }
-  };
-
   const navLinks = [
-    { label: 'Home', href: '#craft' },
     { label: 'The Craft', href: '#craft' },
     { label: 'Biography', href: '#biography' },
     { label: 'Selected Works', href: '#works' },
@@ -33,14 +20,14 @@ export const Footer: React.FC = () => {
 
   return (
     <>
-      <footer className="bg-[#060a0b] border-t border-white/10 text-white pt-20 pb-12 font-sans selection:bg-[#c5a059] selection:text-black">
+      <footer className="bg-[#060a0b] border-t border-white/10 text-white pt-16 sm:pt-20 pb-12 font-sans selection:bg-[#c5a059] selection:text-black">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14">
           {/* Top Tier: Headline + Socials & Contact Metadata Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start pb-14 sm:pb-16">
             {/* Left Column (6 cols): Big Headline & Social Circles */}
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div>
-                <h2 className="text-[40px] sm:text-[54px] lg:text-[62px] font-sans font-medium text-white tracking-tight leading-[1.06] mb-8">
+                <h2 className="text-[38px] sm:text-[52px] lg:text-[62px] font-sans font-medium text-white tracking-tight leading-[1.06] mb-6 sm:mb-8">
                   Book
                   <br />
                   today.
@@ -78,7 +65,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Right Column (6 cols): 2x2 Contact Metadata Grid */}
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 pt-2">
+            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-y-8 sm:gap-y-10 gap-x-8 pt-2">
               {/* LOCATIONS */}
               <div>
                 <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2.5">
@@ -150,10 +137,10 @@ export const Footer: React.FC = () => {
           {/* Thin Divider */}
           <div className="border-t border-white/10" />
 
-          {/* Middle Tier: 4 Columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 py-14 items-start">
-            {/* Column 1: Navigation (3 cols) */}
-            <div className="lg:col-span-3 space-y-3">
+          {/* Middle Tier: 3 Columns (Rebalanced without Subscribe) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 lg:gap-12 py-12 sm:py-14 items-start">
+            {/* Column 1: Navigation */}
+            <div className="sm:col-span-1 md:col-span-4 lg:col-span-4 space-y-3">
               <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
                 Navigation
               </div>
@@ -171,8 +158,8 @@ export const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 2: Resources / Coaching Focus (3 cols) */}
-            <div className="lg:col-span-3 space-y-3">
+            {/* Column 2: Resources / Coaching Focus */}
+            <div className="sm:col-span-1 md:col-span-4 lg:col-span-4 space-y-3">
               <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
                 Resources
               </div>
@@ -190,8 +177,8 @@ export const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 3: Your First Session / Order (3 cols) */}
-            <div className="lg:col-span-3 space-y-3">
+            {/* Column 3: Your First Session */}
+            <div className="sm:col-span-2 md:col-span-4 lg:col-span-4 space-y-3 max-w-sm">
               <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
                 Your First Session
               </div>
@@ -207,42 +194,6 @@ export const Footer: React.FC = () => {
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
-            </div>
-
-            {/* Column 4: Subscribe for Updates (3 cols) */}
-            <div className="lg:col-span-3 space-y-3.5">
-              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
-                Subscribe for Updates
-              </div>
-              <p className="text-[12px] text-zinc-400 font-normal leading-relaxed">
-                Receive private masterclass dates, industry insights, and coaching availability.
-              </p>
-
-              {/* Pill-shaped Input Bar */}
-              <form onSubmit={handleSubscribe} className="relative mt-2">
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/[0.03] border border-white/20 rounded-full px-5 py-3 pr-12 text-[13px] text-white placeholder:text-zinc-500 focus:outline-none focus:border-white/50 focus:bg-white/[0.06] transition-all"
-                />
-                <button
-                  type="submit"
-                  aria-label="Submit newsletter subscription"
-                  className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/10 hover:bg-white text-zinc-300 hover:text-black flex items-center justify-center transition-all duration-200 cursor-pointer"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
-              </form>
-
-              {subscribed && (
-                <div className="flex items-center gap-2 text-[12px] text-[#c5a059] pt-1">
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Thank you. You are subscribed.</span>
-                </div>
-              )}
             </div>
           </div>
 

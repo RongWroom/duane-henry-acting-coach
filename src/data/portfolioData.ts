@@ -10,7 +10,7 @@ export const HERO_DATA = {
   biographySummary:
     "Veteran actor of stage and screen. Special Agent Clayton Reeves on CBS's NCIS, Marvel Studios' Captain Marvel, and dramatic coach. Working one-on-one with actors to cultivate undeniable truth and camera presence.",
   portraitUrl: "/images/duanehenry.PNG",
-  tickerItems: ["BAFTA NOMINATED", "CBS TELEVISION", "MARVEL STUDIOS"],
+  tickerItems: ["SCREEN NATION NOMINATED", "CBS TELEVISION", "MARVEL STUDIOS"],
 };
 
 export const BIOGRAPHY_DATA = {
@@ -23,13 +23,13 @@ export const BIOGRAPHY_DATA = {
   philosophyLabel: "Approach & Craft",
   metrics: [
     { value: "15+", label: "YEARS ON SCREEN & STAGE" },
-    { value: "BAFTA", label: "NOMINEE (BEST NEWCOMER)" },
+    { value: "SCREEN NATION", label: "NOMINEE (BEST EMERGING TALENT)" },
     { value: "1-1", label: "PRIVATE SESSIONS" },
   ],
   category: "ORIGINS • DISCIPLINE • REFINEMENT",
   heading: "From the West Midlands to Global Primetime.",
   paragraphs: [
-    "Born and raised in Birmingham, England, Duane Henry forged his craft in the gritty, disciplined trenches of British theatre and television, including the BBC's Doctors (earning a prestigious BAFTA nomination for Best Newcomer) and independent British features.",
+    "Born and raised in Birmingham, England, Duane Henry forged his craft in the gritty, disciplined trenches of British theatre and television, including the BBC's Doctors (earning a prestigious Screen Nation Film & TV Awards nomination for Best Emerging Talent) and independent British features.",
     "His transition to American cinema caught worldwide attention when he was cast as MI6 Officer Clayton Reeves on the globally celebrated juggernaut NCIS across multiple seasons. He subsequently joined the Marvel Cinematic Universe in the blockbuster Captain Marvel.",
     "When Duane isn’t filming, he will work directly with you through focused, one-on-one coaching sessions. He equips actors with practical, real-world camera tools—stripping away artificial mannerisms to uncover authentic, undeniable presence.",
   ],
@@ -60,6 +60,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "CBS NETWORK",
       accoladeOrEpisodes: "SERIES REGULAR",
       accentBorder: "dark",
+      imdbUrl: "https://www.imdb.com/title/tt0364845/",
     },
     {
       id: "captain-marvel",
@@ -69,6 +70,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "MARVEL STUDIOS",
       accoladeOrEpisodes: "THEATRICAL",
       accentBorder: "sand",
+      imdbUrl: "https://www.imdb.com/title/tt4154664/",
     },
     {
       id: "dubplate-drama",
@@ -78,6 +80,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "CHANNEL 4 / MTV BASE",
       accoladeOrEpisodes: "SERIES REGULAR",
       accentBorder: "dark",
+      imdbUrl: "https://www.imdb.com/title/tt0499386/",
     },
     {
       id: "comedown",
@@ -87,15 +90,17 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "STUDIOCANAL / SERIOUS PICTURES",
       accoladeOrEpisodes: "THEATRICAL",
       accentBorder: "sand",
+      imdbUrl: "https://www.imdb.com/title/tt1376168/",
     },
     {
       id: "doctors",
       category: "TELEVISION DRAMA",
       title: "Doctors",
-      details: "Breakout role as Gareth Broadhurst, culminating in BAFTA recognition.",
+      details: "Breakout role as Gareth Broadhurst, culminating in Screen Nation Film & TV Awards recognition.",
       networkOrStudio: "BBC DRAMA",
-      accoladeOrEpisodes: "BAFTA NOMINEE",
+      accoladeOrEpisodes: "SCREEN NATION NOMINEE",
       accentBorder: "sand",
+      imdbUrl: "https://www.imdb.com/title/tt0241383/",
     },
     {
       id: "the-cut",
@@ -105,6 +110,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "BBC TELEVISION",
       accoladeOrEpisodes: "SERIES REGULAR",
       accentBorder: "dark",
+      imdbUrl: "https://www.imdb.com/title/tt1531869/",
     },
     {
       id: "we",
@@ -114,6 +120,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "THE WEINSTEIN CO.",
       accoladeOrEpisodes: "THEATRICAL",
       accentBorder: "sand",
+      imdbUrl: "https://www.imdb.com/title/tt1536048/",
     },
     {
       id: "king-lear",
@@ -123,6 +130,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "STAGE TOUR",
       accoladeOrEpisodes: "LIVE PRODUCTION",
       accentBorder: "sand",
+      imdbUrl: "https://www.imdb.com/name/nm1821157/",
     },
     {
       id: "jericho",
@@ -132,6 +140,7 @@ export const SELECTED_WORKS_DATA = {
       networkOrStudio: "ITV NETWORK",
       accoladeOrEpisodes: "PERIOD DRAMA",
       accentBorder: "sand",
+      imdbUrl: "https://www.imdb.com/title/tt0805663/",
     },
   ] as CreditItem[],
 };
