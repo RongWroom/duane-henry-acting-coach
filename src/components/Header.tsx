@@ -34,7 +34,6 @@ export const Header: React.FC<HeaderProps> = ({ onBookSession }) => {
     { label: 'Biography', href: '#biography' },
     { label: 'Selected Works', href: '#works' },
     { label: 'Coaching', href: '#coaching' },
-    { label: 'Contact', href: '#inquiries' },
   ];
 
   return (
