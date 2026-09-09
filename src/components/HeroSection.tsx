@@ -104,8 +104,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
                 {/* Subdued overlay label */}
                 <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-300">
-                  <span>Clayton Reeves • NCIS</span>
-                  <span className="text-[#c5a059]">CBS Television</span>
+                  <span className="font-semibold text-white">Duane Henry</span>
+                  <span className="text-[#c5a059]">London / L.A.</span>
                 </div>
               </div>
             </ScrollReveal>
