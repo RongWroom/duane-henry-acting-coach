@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookSession }) => {
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 md:px-14 h-20 flex items-center justify-between">
         {/* Left: Brand / Logo */}
         <div className="flex items-center">
           <a href="#craft" className="flex items-center gap-3 group">
@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ onBookSession }) => {
         <div className="flex items-center space-x-3">
           <button
             onClick={handleBookClick}
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-all duration-200 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[11px] font-bold tracking-[0.12em] uppercase transition-all duration-200 cursor-pointer"
           >
             <span>Book a Session</span>
             <ArrowUpRight className="w-3.5 h-3.5" />

@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
                     href="https://www.imdb.com/name/nm1821157/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Duane Henry on IMDb"
+                    aria-label="Duane Henry IMDb Profile"
                     className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-white/20 bg-white/4 text-zinc-300 hover:text-white hover:border-white/50 hover:bg-white/10 transition-all duration-200 text-[12px] font-bold tracking-tight"
                   >
                     <span>IMDb Profile</span>
@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-y-8 sm:gap-y-10 gap-x-8 pt-2">
               {/* LOCATIONS */}
               <div>
-                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2.5">
+                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2.5">
                   Locations
                 </div>
                 <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
 
               {/* CONTACT ME */}
               <div>
-                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2.5">
+                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2.5">
                   Contact Me
                 </div>
                 <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
@@ -95,13 +95,13 @@ export const Footer: React.FC = () => {
 
               {/* OPEN TIME */}
               <div>
-                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2.5">
+                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2.5">
                   Open Time
                 </div>
                 <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
                   09.00am – 18.00pm
                   <br />
-                  <span className="text-zinc-500 text-[12px]">Virtual & Studio by Appointment</span>
+                  <span className="text-zinc-400 text-[12px]">Virtual & Studio by Appointment</span>
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 lg:gap-12 py-12 sm:py-14 items-start">
             {/* Column 1: Navigation */}
             <div className="sm:col-span-1 md:col-span-4 lg:col-span-4 space-y-3">
-              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
+              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-3.5">
                 Navigation
               </div>
               <ul className="space-y-2.5">
@@ -133,7 +133,7 @@ export const Footer: React.FC = () => {
 
             {/* Column 2: Resources / Coaching Focus */}
             <div className="sm:col-span-1 md:col-span-4 lg:col-span-4 space-y-3">
-              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
+              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-3.5">
                 Resources
               </div>
               <ul className="space-y-2.5">
@@ -152,7 +152,7 @@ export const Footer: React.FC = () => {
 
             {/* Column 3: Your First Session */}
             <div className="sm:col-span-2 md:col-span-4 lg:col-span-4 space-y-3 max-w-sm">
-              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-3.5">
+              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-3.5">
                 Your First Session
               </div>
               <p className="text-[13px] text-zinc-400 leading-relaxed font-normal">
@@ -174,7 +174,7 @@ export const Footer: React.FC = () => {
           <div className="border-t border-white/10" />
 
           {/* Bottom Tier: Legal & Copyright Bar */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[12px] text-zinc-500 gap-4">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[12px] text-zinc-400 gap-4">
             <button
               onClick={() => setActiveModal('terms')}
               className="hover:text-zinc-300 transition-colors cursor-pointer"

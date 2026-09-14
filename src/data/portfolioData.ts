@@ -9,7 +9,7 @@ export const HERO_DATA = {
   nameLast: "HENRY.",
   biographySummary:
     "Veteran actor of stage and screen. Special Agent Clayton Reeves on CBS's NCIS, Marvel Studios' Captain Marvel, and dramatic coach. Working one-on-one with actors to cultivate undeniable truth and camera presence.",
-  portraitUrl: "/images/duanehenry.PNG",
+  portraitUrl: "/images/duanehenry.jpg",
   tickerItems: ["SCREEN NATION NOMINATED", "CBS TELEVISION", "MARVEL STUDIOS"],
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowDown, ArrowRight, Play } from 'lucide-react';
 import { HERO_DATA } from '../data/portfolioData';
-import { ScrollReveal } from './ScrollReveal';
 
 interface HeroSectionProps {
   onExploreCoaching: () => void;
@@ -17,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="craft"
-      className="relative min-h-[92vh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-page-bg text-white"
+      className="relative min-h-[92svh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-page-bg text-white"
     >
       {/* Cinematic dark teal volumetric ambient glow */}
       <div
@@ -29,23 +28,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-10 md:px-14 my-auto py-8 lg:py-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Typography & CTAs (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col items-start order-2 lg:order-1">
-            <ScrollReveal delay={0.05}>
+          <div className="lg:col-span-7 flex flex-col items-start order-1">
+            <div>
               <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-gold mb-4">
                 Dramatic Acting & Private Coaching
               </div>
-            </ScrollReveal>
+            </div>
 
-            <ScrollReveal delay={0.15}>
+            <div>
               <h1 className="font-sans font-bold tracking-tight text-white leading-none text-[44px] sm:text-[68px] lg:text-[78px] xl:text-[88px]">
                 DUANE HENRY
                 <span className="block font-serif font-normal italic text-zinc-300 text-[32px] sm:text-[48px] lg:text-[54px] xl:text-[62px] mt-2">
                   The Craft of Screen Presence
                 </span>
               </h1>
-            </ScrollReveal>
+            </div>
 
-            <ScrollReveal delay={0.25}>
+            <div>
               <p className="mt-6 text-[16px] sm:text-[18px] leading-[1.75] text-zinc-400 font-normal max-w-xl">
                 Veteran actor of stage and screen (CBS&apos;s{' '}
                 <a
@@ -68,9 +67,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 ). Offering focused, one-on-one coaching for actors preparing for auditions, cold reads, and high-stakes
                 on-camera work.
               </p>
-            </ScrollReveal>
+            </div>
 
-            <ScrollReveal delay={0.35}>
+            <div>
               {/* Clean CTA Group */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 {onBookSession && (
@@ -100,19 +99,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
-            </ScrollReveal>
+            </div>
           </div>
 
           {/* Right Column: Architectural Framed Headshot (5 cols) */}
-          <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-            <ScrollReveal delay={0.2} className="relative w-full max-w-sm sm:max-w-md">
+          <div className="lg:col-span-5 order-2 flex justify-center">
+            <div className="relative w-full max-w-sm sm:max-w-md">
               <div className="relative aspect-3/4 w-full rounded-xl overflow-hidden bg-card-bg border border-white/10 shadow-2xl group">
-                <img
-                  src={HERO_DATA.portraitUrl}
-                  alt="Duane Henry dramatic portrait"
-                  className="w-full h-full object-cover grayscale contrast-110 transition-transform duration-1000 ease-out group-hover:scale-105"
-                  loading="eager"
-                />
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet="/images/duanehenry-480.avif 480w, /images/duanehenry-720.avif 720w, /images/duanehenry-937.avif 937w"
+                    sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) 448px, 384px"
+                  />
+                  <img
+                    src={HERO_DATA.portraitUrl}
+                    alt="Duane Henry, actor and private acting coach"
+                    width="937"
+                    height="1238"
+                    className="w-full h-full object-cover grayscale contrast-110 transition-transform duration-1000 ease-out group-hover:scale-105"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                  />
+                </picture>
 
                 {/* Subtle vignette */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -123,14 +133,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <span className="text-accent-gold">London / L.A.</span>
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Metadata Bar */}
       <div className="max-w-7xl mx-auto w-full px-6 sm:px-10 md:px-14 pt-4 border-t border-white/10 relative z-10">
-        <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] font-medium tracking-[0.18em] uppercase text-zinc-500 gap-3">
+        <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] font-medium tracking-[0.18em] uppercase text-zinc-400 gap-3">
           <a
             href="#biography"
             className="flex items-center gap-2 hover:text-zinc-300 transition-colors"
