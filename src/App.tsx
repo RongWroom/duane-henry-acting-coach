@@ -1,9 +1,11 @@
 import React, { useState, lazy, Suspense, useEffect, useRef, type ReactNode } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
-import { SpotlightCursor } from './components/SpotlightCursor';
 
 // Lazy-loaded below-the-fold sections to reduce unused JavaScript on initial paint.
+const SpotlightCursor = lazy(() =>
+  import('./components/SpotlightCursor').then(m => ({ default: m.SpotlightCursor })),
+);
 const BiographySection = lazy(() =>
   import('./components/BiographySection').then(m => ({ default: m.BiographySection })),
 );
@@ -75,6 +77,8 @@ export default function App() {
   // long task during first paint.
   const [showCursor, setShowCursor] = useState(false);
   useEffect(() => {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
     const schedule = (cb: () => void) => {
       const ric = (window as { requestIdleCallback?: (cb: () => void) => void }).requestIdleCallback;
       if (ric) ric(cb);
@@ -114,7 +118,11 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-page-bg text-white font-sans selection:bg-accent-gold selection:text-black">
       {/* Circular Inverting Mouse Follower (deferred to avoid main-thread long task) */}
-      {showCursor && <SpotlightCursor />}
+      {showCursor && (
+        <Suspense fallback={null}>
+          <SpotlightCursor />
+        </Suspense>
+      )}
 
       {/* Navigation Header */}
       <Header onBookSession={handleScrollToInquiries} />
