@@ -64,11 +64,11 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
   return (
     <section
       id="works"
-      className="bg-[#070c0d] py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-[#c5a059] selection:text-black"
+      className="bg-page-bg py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-accent-gold selection:text-black"
     >
       {/* Subtle ambient lighting */}
       <div
-        className="absolute top-1/4 -right-20 w-[450px] h-[450px] bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-1/4 -right-20 w-112.5 h-112.5 bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -77,8 +77,8 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
         <ScrollReveal>
           <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-16 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
             <div className="flex items-center gap-3">
-              <span className="text-[#c5a059] font-mono">{sectionNumber}</span>
-              <span className="w-8 h-[1px] bg-white/15" />
+              <span className="text-accent-gold font-mono">{sectionNumber}</span>
+              <span className="w-8 h-px bg-white/15" />
               <span className="text-white">{sectionTitle}</span>
             </div>
             <span className="text-zinc-500">{subtitle}</span>
@@ -90,8 +90,8 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
           <div
             className={`relative w-full rounded-2xl bg-black overflow-hidden border border-white/15 shadow-2xl shadow-black/80 mb-14 group ${
               isPlaying
-                ? 'aspect-[16/9]'
-                : 'min-h-[380px] sm:min-h-0 sm:aspect-[16/9] lg:aspect-[21/9]'
+                ? 'aspect-video'
+                : 'min-h-95 sm:min-h-0 sm:aspect-video lg:aspect-21/9'
             }`}
           >
             {isPlaying ? (
@@ -117,7 +117,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
               /* Poster State with Editorial Text Overlay on Page Load */
               <div
                 onClick={() => setIsPlaying(true)}
-                className="relative w-full h-full min-h-[380px] sm:min-h-0 cursor-pointer flex flex-col justify-between p-5 sm:p-7 md:p-8"
+                className="relative w-full h-full min-h-95 sm:min-h-0 cursor-pointer flex flex-col justify-between p-5 sm:p-7 md:p-8"
               >
                 <img
                   src={featuredReel.stillUrl}
@@ -126,11 +126,11 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                 />
 
                 {/* Multilayer gradient for crystal clear contrast behind text & stage photo */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/25 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/45 to-black/25 pointer-events-none" />
 
                 {/* Top Bar on Reel Card */}
                 <div className="relative z-10 flex items-center justify-between text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-300">
-                  <span className="bg-[#070c0d]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[#c5a059] text-[10px] sm:text-[11px]">
+                  <span className="bg-page-bg/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-accent-gold text-[10px] sm:text-[11px]">
                     {featuredReel.badge}
                   </span>
                   <span className="text-zinc-400 font-medium text-[10px] sm:text-[11px]">
@@ -140,7 +140,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
 
                 {/* Play Button Overlay - naturally separated in flex flow so it never collides with text */}
                 <div className="relative z-10 my-auto py-4 flex items-center justify-center pointer-events-none">
-                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#c5a059] transition-all duration-300">
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-accent-gold transition-all duration-300">
                     <Play className="w-5 h-5 sm:w-7 sm:h-7 fill-current ml-0.5" />
                   </div>
                 </div>
@@ -148,7 +148,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                 {/* Bottom Bar & Description */}
                 <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div className="max-w-2xl">
-                    <div className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-1 sm:mb-1.5">
+                    <div className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-gold mb-1 sm:mb-1.5">
                       {featuredReel.subheading}
                     </div>
                     <h3 className="font-sans font-bold text-[20px] sm:text-[28px] md:text-[34px] text-white leading-tight">
@@ -159,14 +159,14 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                     </p>
                   </div>
 
-                  <div className="hidden sm:block flex-shrink-0">
+                  <div className="hidden sm:block shrink-0">
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         setIsPlaying(true);
                       }}
-                      className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-[#c5a059] text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-200 shadow-xl cursor-pointer"
+                      className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-accent-gold text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-200 shadow-xl cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
                       <span>Play Reel</span>
@@ -184,7 +184,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
             {/* Top Bar for Banner */}
             <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-14 flex items-center justify-between mb-4">
               <div className="flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
-                <span className="w-2 h-2 rounded-full bg-[#c5a059]" />
+                <span className="w-2 h-2 rounded-full bg-accent-gold" />
                 <span>Filmography &amp; Stage Performance</span>
               </div>
               <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-zinc-500">
@@ -195,11 +195,11 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
 
             {/* Left & Right Gradient Fade Masks */}
             <div
-              className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-gradient-to-r from-[#070c0d] via-[#070c0d]/90 to-transparent z-20"
+              className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-linear-to-r from-page-bg via-page-bg/90 to-transparent z-20"
               aria-hidden="true"
             />
             <div
-              className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-gradient-to-l from-[#070c0d] via-[#070c0d]/90 to-transparent z-20"
+              className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-36 bg-linear-to-l from-page-bg via-page-bg/90 to-transparent z-20"
               aria-hidden="true"
             />
 
@@ -229,7 +229,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                   return (
                     <div
                       key={`${credit.id}-${idx}`}
-                      className={`w-[300px] sm:w-[350px] md:w-[370px] h-[220px] sm:h-[235px] shrink-0 p-6 sm:p-7 rounded-2xl bg-[#090f11] border border-white/15 hover:border-[#c5a059]/60 hover:bg-[#0c1517] transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-2xl hover:shadow-[#c5a059]/10 cursor-default ${
+                      className={`w-75 sm:w-87.5 md:w-92.5 h-55 sm:h-58.75 shrink-0 p-6 sm:p-7 rounded-2xl bg-[#090f11] border border-white/15 hover:border-accent-gold/60 hover:bg-page-bg-alt transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-2xl hover:shadow-accent-gold/10 cursor-default ${
                         isOffset
                           ? 'translate-y-6 sm:translate-y-8'
                           : 'translate-y-0 sm:-translate-y-2'
@@ -237,7 +237,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#c5a059]">
+                          <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-accent-gold">
                             {credit.category}
                           </span>
                           <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 text-zinc-400 border border-white/10">
@@ -245,7 +245,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                           </span>
                         </div>
 
-                        <h4 className="font-sans font-bold text-[19px] sm:text-[21px] text-white group-hover:text-[#c5a059] transition-colors leading-snug mb-2 line-clamp-1">
+                        <h4 className="font-sans font-bold text-[19px] sm:text-[21px] text-white group-hover:text-accent-gold transition-colors leading-snug mb-2 line-clamp-1">
                           {credit.imdbUrl ? (
                             <a
                               href={credit.imdbUrl}
@@ -254,7 +254,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                               className="inline-flex items-center gap-1.5 hover:underline"
                             >
                               <span>{credit.title}</span>
-                              <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 text-[#c5a059] transition-opacity" />
+                              <ArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 text-accent-gold transition-opacity" />
                             </a>
                           ) : (
                             credit.title
@@ -272,14 +272,14 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                             href={credit.imdbUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-400 hover:text-[#c5a059] transition-colors"
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-400 hover:text-accent-gold transition-colors"
                             title={`View ${credit.title} on IMDb`}
                           >
                             <span>IMDb</span>
-                            <ArrowUpRight className="w-3 h-3 text-[#c5a059]" />
+                            <ArrowUpRight className="w-3 h-3 text-accent-gold" />
                           </a>
                         ) : (
-                          <span className="text-[#c5a059]/40 group-hover:text-[#c5a059] text-[11px] transition-colors">
+                          <span className="text-accent-gold/40 group-hover:text-accent-gold text-[11px] transition-colors">
                             ✦
                           </span>
                         )}

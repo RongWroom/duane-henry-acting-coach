@@ -104,7 +104,7 @@ export const SpotlightCursor: React.FC<SpotlightCursorProps> = ({
         scale: { duration: 0.12, ease: 'easeOut' },
         opacity: { duration: 0.15 },
       }}
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999]"
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-9999"
     />
   );
 };

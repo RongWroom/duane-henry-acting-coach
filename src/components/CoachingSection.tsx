@@ -20,11 +20,11 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
   return (
     <section
       id="coaching"
-      className="bg-[#070c0d] py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-[#c5a059] selection:text-black"
+      className="bg-page-bg py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-accent-gold selection:text-black"
     >
       {/* Subtle ambient lighting */}
       <div
-        className="absolute top-1/2 -left-20 w-[500px] h-[500px] bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-1/2 -left-20 w-125 h-125 bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -33,8 +33,8 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
         <ScrollReveal>
           <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-16 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
             <div className="flex items-center gap-3">
-              <span className="text-[#c5a059] font-mono">{sectionNumber}</span>
-              <span className="w-8 h-[1px] bg-white/15" />
+              <span className="text-accent-gold font-mono">{sectionNumber}</span>
+              <span className="w-8 h-px bg-white/15" />
               <span className="text-white">{sectionTitle}</span>
             </div>
             <span className="text-zinc-500">{subtitle}</span>
@@ -46,7 +46,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
           {/* Left Column (5 cols): Overview & Format */}
           <div className="lg:col-span-5 flex flex-col space-y-8">
             <ScrollReveal delay={0.1}>
-              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-4">
+              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-gold mb-4">
                 {category}
               </div>
 
@@ -65,7 +65,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
             {/* Session Format Info Card matching Footer metadata aesthetics */}
             <ScrollReveal delay={0.2}>
               <div className="bg-[#090f11] border border-white/15 rounded-2xl p-7 text-zinc-300 shadow-xl relative overflow-hidden">
-                <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.16em] uppercase text-[#c5a059] mb-3">
+                <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.16em] uppercase text-accent-gold mb-3">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>{sessionLocations.label}</span>
                 </div>
@@ -106,16 +106,16 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                       aria-expanded={isOpen}
                     >
                       <div className="flex items-center gap-4 flex-1 min-w-0">
-                        <span className="font-mono text-[12px] font-semibold text-[#c5a059] bg-[#c5a059]/10 px-2.5 py-1 rounded-full flex-shrink-0">
+                        <span className="font-mono text-[12px] font-semibold text-accent-gold bg-accent-gold/10 px-2.5 py-1 rounded-full shrink-0">
                           {item.number}
                         </span>
-                        <h3 className="font-sans font-semibold text-[18px] sm:text-[20px] text-white group-hover:text-[#c5a059] transition-colors leading-snug">
+                        <h3 className="font-sans font-semibold text-[18px] sm:text-[20px] text-white group-hover:text-accent-gold transition-colors leading-snug">
                           {item.title}
                         </h3>
                       </div>
 
-                      <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-                        <span className="text-[11px] font-medium tracking-[0.14em] uppercase text-[#c5a059] opacity-0 group-hover:opacity-100 transition-opacity hidden sm:inline-block">
+                      <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+                        <span className="text-[11px] font-medium tracking-[0.14em] uppercase text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity hidden sm:inline-block">
                           {isOpen ? 'Close' : 'View Details'}
                         </span>
                         <ChevronDown
@@ -153,7 +153,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                           <button
                             type="button"
                             onClick={() => onSelectModule(item.title)}
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[11px] font-bold tracking-[0.14em] uppercase transition-colors cursor-pointer shadow-lg"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[11px] font-bold tracking-[0.14em] uppercase transition-colors cursor-pointer shadow-lg"
                           >
                             <span>Book This Session</span>
                             <ArrowUpRight className="w-3.5 h-3.5" />

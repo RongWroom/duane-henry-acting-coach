@@ -17,11 +17,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="craft"
-      className="relative min-h-[92vh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-[#070c0d] text-white"
+      className="relative min-h-[92vh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-page-bg text-white"
     >
       {/* Cinematic dark teal volumetric ambient glow */}
       <div
-        className="absolute top-20 right-10 w-[550px] h-[550px] bg-[#0e2c2b]/35 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-20 right-10 w-137.5 h-137.5 bg-[#0e2c2b]/35 rounded-full blur-[160px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -31,13 +31,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Left Column: Typography & CTAs (7 cols) */}
           <div className="lg:col-span-7 flex flex-col items-start order-2 lg:order-1">
             <ScrollReveal delay={0.05}>
-              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-4">
+              <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-gold mb-4">
                 Dramatic Acting & Private Coaching
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.15}>
-              <h1 className="font-sans font-bold tracking-tight text-white leading-[1.0] text-[44px] sm:text-[68px] lg:text-[78px] xl:text-[88px]">
+              <h1 className="font-sans font-bold tracking-tight text-white leading-none text-[44px] sm:text-[68px] lg:text-[78px] xl:text-[88px]">
                 DUANE HENRY
                 <span className="block font-serif font-normal italic text-zinc-300 text-[32px] sm:text-[48px] lg:text-[54px] xl:text-[62px] mt-2">
                   The Craft of Screen Presence
@@ -52,7 +52,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   href="https://www.imdb.com/title/tt0364845/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-200 font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-700 hover:decoration-[#c5a059] transition-colors"
+                  className="text-zinc-200 font-medium hover:text-accent-gold underline underline-offset-4 decoration-zinc-700 hover:decoration-accent-gold transition-colors"
                 >
                   NCIS
                 </a>
@@ -61,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   href="https://www.imdb.com/title/tt4154664/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-200 font-medium hover:text-[#c5a059] underline underline-offset-4 decoration-zinc-700 hover:decoration-[#c5a059] transition-colors"
+                  className="text-zinc-200 font-medium hover:text-accent-gold underline underline-offset-4 decoration-zinc-700 hover:decoration-accent-gold transition-colors"
                 >
                   Captain Marvel
                 </a>
@@ -76,7 +76,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {onBookSession && (
                   <button
                     onClick={onBookSession}
-                    className="px-7 py-3.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200"
+                    className="px-7 py-3.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200"
                   >
                     Book a Session
                   </button>
@@ -87,7 +87,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     onClick={onWatchReel}
                     className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 text-white hover:bg-white/5 text-[12px] font-semibold tracking-[0.14em] uppercase transition-all duration-200"
                   >
-                    <Play className="w-3.5 h-3.5 fill-current text-[#c5a059]" />
+                    <Play className="w-3.5 h-3.5 fill-current text-accent-gold" />
                     <span>Watch Reel</span>
                   </button>
                 )}
@@ -106,7 +106,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Right Column: Architectural Framed Headshot (5 cols) */}
           <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
             <ScrollReveal delay={0.2} className="relative w-full max-w-sm sm:max-w-md">
-              <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#0f1a1c] border border-white/10 shadow-2xl group">
+              <div className="relative aspect-3/4 w-full rounded-xl overflow-hidden bg-card-bg border border-white/10 shadow-2xl group">
                 <img
                   src={HERO_DATA.portraitUrl}
                   alt="Duane Henry dramatic portrait"
@@ -115,12 +115,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 />
 
                 {/* Subtle vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
                 {/* Subdued overlay label */}
                 <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-300">
                   <span className="font-semibold text-white">Duane Henry</span>
-                  <span className="text-[#c5a059]">London / L.A.</span>
+                  <span className="text-accent-gold">London / L.A.</span>
                 </div>
               </div>
             </ScrollReveal>

@@ -163,7 +163,7 @@ export const COACHING_DATA = {
       number: "01",
       title: "Scene Study & Monologues",
       description:
-        "Detailed deconstruction of contemporary or classical scripts. We examine beat transitions, emotional clarity, and making bold, grounded choices tailored for screen and stage.",
+        "Detailed deconstruction of contemporary or classical scripts. I examine beat transitions, emotional clarity, and making bold, grounded choices tailored for screen and stage.",
       focusAreas: ["Beat Breakdown", "Emotional Grounding", "Camera Technique"],
       deliverables: "Comprehensive work on your chosen scene with take-by-take notes.",
     },
@@ -172,7 +172,7 @@ export const COACHING_DATA = {
       number: "02",
       title: "Audition & Self-Tape Prep",
       description:
-        "Focused work on your actual audition sides. We hone your eye-line, sharpen the opening moments of the tape, and ensure your choices stand out to casting directors.",
+        "Focused work on your actual audition sides. I hone your eye-line, sharpen the opening moments of the tape, and ensure your choices stand out to casting directors.",
       focusAreas: ["Sides Breakdown", "Eye-Line & Framing", "Casting Impact"],
       deliverables: "Focused preparation on your current or upcoming audition sides.",
     },

@@ -8,7 +8,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "lint:tailwind": "tailwind-lint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:tailwind:fix": "tailwind-lint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
+    "prepare": "node scripts/install-pre-commit.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -31,6 +34,7 @@
     "@vercel/node": "^13.0.0",
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.0",
+    "tailwind-lint": "^0.12.1",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",

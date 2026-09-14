@@ -24,8 +24,8 @@ export const ReelModal: React.FC<ReelModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-5xl bg-[#0c1517] border border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-10000 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-5xl bg-page-bg-alt border border-white/15 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         {/* Header Bar */}
         <div className="p-4 sm:p-5 flex items-center justify-between border-b border-white/10 bg-black/50">
           <div className="flex items-center gap-3">
@@ -44,7 +44,7 @@ export const ReelModal: React.FC<ReelModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Real Vimeo Video Player */}
-        <div className="relative aspect-[16/9] w-full bg-black flex items-center justify-center overflow-hidden">
+        <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
           <iframe
             src="https://player.vimeo.com/video/1206826083?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             className="w-full h-full absolute inset-0 border-0"
