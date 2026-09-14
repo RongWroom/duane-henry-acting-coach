@@ -19,6 +19,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (preselectedObjective) {
@@ -26,28 +27,43 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     }
   }, [preselectedObjective]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
       setSubmitted(true);
-    }, 600);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to send inquiry. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section
       id="inquiries"
-      className="bg-[#070c0d] py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-[#c5a059] selection:text-black"
+      className="bg-page-bg py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-accent-gold selection:text-black"
     >
       {/* Cinematic dark teal & gold ambient background glows */}
       <div
-        className="absolute -bottom-24 -left-20 w-[550px] h-[550px] bg-[#0e2c2b]/25 rounded-full blur-[160px] pointer-events-none"
+        className="absolute -bottom-24 -left-20 w-137.5 h-137.5 bg-[#0e2c2b]/25 rounded-full blur-[160px] pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute top-12 right-0 w-[450px] h-[450px] bg-[#c5a059]/5 rounded-full blur-[140px] pointer-events-none"
+        className="absolute top-12 right-0 w-112.5 h-112.5 bg-accent-gold/5 rounded-full blur-[140px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -56,8 +72,8 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
         <ScrollReveal>
           <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-16 text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400">
             <div className="flex items-center gap-3">
-              <span className="text-[#c5a059] font-mono">04</span>
-              <span className="w-8 h-[1px] bg-white/15" />
+              <span className="text-accent-gold font-mono">04</span>
+              <span className="w-8 h-px bg-white/15" />
               <span className="text-white">PRIVATE INQUIRIES &amp; BOOKING</span>
             </div>
             <span className="text-zinc-500">LONDON • LOS ANGELES • VIRTUAL</span>
@@ -70,7 +86,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
           <div className="lg:col-span-5 flex flex-col space-y-8">
             <ScrollReveal delay={0.05}>
               <div>
-                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059] mb-4">
+                <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-gold mb-4">
                   Direct Mentorship &amp; Audition Prep
                 </div>
 
@@ -93,7 +109,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                 {/* LOCATIONS */}
                 <div>
                   <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <MapPin className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Locations</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
@@ -106,7 +122,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                 {/* URGENT CASTING */}
                 <div>
                   <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <Clock className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Audition Deadlines</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
@@ -117,7 +133,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                 {/* CONFIDENTIALITY */}
                 <div>
                   <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Confidentiality</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
@@ -128,13 +144,13 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                 {/* DIRECT EMAIL */}
                 <div>
                   <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
-                    <Mail className="w-3.5 h-3.5 text-[#c5a059]" />
+                    <Mail className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Direct Inquiries</span>
                   </div>
                   <div className="text-[13px] text-zinc-300 leading-relaxed font-normal">
                     <a
                       href="mailto:coaching@duanehenry.com"
-                      className="hover:text-[#c5a059] transition-colors underline-offset-4 hover:underline"
+                      className="hover:text-accent-gold transition-colors underline-offset-4 hover:underline"
                     >
                       coaching@duanehenry.com
                     </a>
@@ -146,7 +162,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
             {/* Duane's Philosophy Quote */}
             <ScrollReveal delay={0.25}>
               <div className="flex items-start gap-4 pt-1">
-                <div className="w-10 h-10 rounded-full border border-white/20 bg-white/[0.04] flex items-center justify-center text-[#c5a059] shrink-0 font-serif italic text-[20px]">
+                <div className="w-10 h-10 rounded-full border border-white/20 bg-white/4 flex items-center justify-center text-accent-gold shrink-0 font-serif italic text-[20px]">
                   &ldquo;
                 </div>
                 <div>
@@ -164,10 +180,10 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
           {/* Right Column (7 cols): Bespoke Luxury Booking Module */}
           <div className="lg:col-span-7">
             <ScrollReveal delay={0.1}>
-              <div className="bg-[#091113]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-7 sm:p-10 shadow-2xl relative overflow-hidden">
+              <div className="bg-[#091113]/80 backdrop-blur-xl border border-white/8 rounded-2xl p-7 sm:p-10 shadow-2xl relative overflow-hidden">
                 {/* Subtle top golden ambient border */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c5a059]/40 to-transparent"
+                  className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-accent-gold/40 to-transparent"
                   aria-hidden="true"
                 />
 
@@ -175,7 +191,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                   <form onSubmit={handleSubmit} className="space-y-5">
                     {/* Header */}
                     <div>
-                      <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#c5a059] mb-1.5">
+                      <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-accent-gold mb-1.5">
                         Direct Inquiry
                       </div>
                       <h3 className="font-sans font-bold text-[24px] sm:text-[28px] text-white tracking-tight">
@@ -186,8 +202,8 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                       </p>
 
                       {preselectedObjective && preselectedObjective !== 'Scene Study & Monologues' && (
-                        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/25 text-[11px] font-medium text-[#c5a059]">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#c5a059]" />
+                        <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-gold/10 border border-accent-gold/25 text-[11px] font-medium text-accent-gold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-gold" />
                           <span>Selected Focus: {preselectedObjective}</span>
                         </div>
                       )}
@@ -209,7 +225,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="Your Name"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
+                          className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
                         />
                       </div>
 
@@ -227,7 +243,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="your.email@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
+                          className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -246,7 +262,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         placeholder="https://www.spotlight.com/... or IMDb link"
                         value={formData.link}
                         onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                        className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
+                        className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
                       />
                     </div>
 
@@ -264,17 +280,17 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           required
                           value={formData.objective}
                           onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
-                          className="w-full bg-[#0c1517] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-[#0f1b1e] rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200 cursor-pointer appearance-none pr-10"
+                          className="w-full bg-page-bg-alt border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-[#0f1b1e] rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200 cursor-pointer appearance-none pr-10"
                         >
                           {COACHING_DATA.modules.map((m) => (
-                            <option key={m.id} value={m.title} className="bg-[#0c1517] text-white">
+                            <option key={m.id} value={m.title} className="bg-page-bg-alt text-white">
                               {m.title}
                             </option>
                           ))}
-                          <option value="Urgent Audition / Self-Tape Callback" className="bg-[#0c1517] text-white">
+                          <option value="Urgent Audition / Self-Tape Callback" className="bg-page-bg-alt text-white">
                             Urgent Audition Prep (24–48h)
                           </option>
-                          <option value="General Consultation & Mentorship" className="bg-[#0c1517] text-white">
+                          <option value="General Consultation & Mentorship" className="bg-page-bg-alt text-white">
                             General Consultation &amp; Mentorship
                           </option>
                         </select>
@@ -298,21 +314,21 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         placeholder="Tell Duane about your upcoming audition sides, project details, or deadlines..."
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#c5a059] focus:bg-white/[0.05] rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200 resize-none"
+                        className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200 resize-none"
                       />
                     </div>
 
                     {/* Submit Bar */}
                     <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
                       <div className="flex items-center gap-2 text-[12px] text-zinc-400">
-                        <ShieldCheck className="w-4 h-4 text-[#c5a059] shrink-0" />
+                        <ShieldCheck className="w-4 h-4 text-accent-gold shrink-0" />
                         <span>Confidential &amp; NDA protected</span>
                       </div>
 
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black hover:bg-[#c5a059] hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-lg hover:shadow-[#c5a059]/20 disabled:opacity-50"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-lg hover:shadow-accent-gold/20 disabled:opacity-50"
                       >
                         {isSubmitting ? (
                           <>
@@ -327,15 +343,21 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         )}
                       </button>
                     </div>
+
+                    {submitError && (
+                      <div className="mt-4 flex items-center gap-2 text-[13px] text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+                        <span>{submitError}</span>
+                      </div>
+                    )}
                   </form>
                 ) : (
                   /* Success State */
                   <div className="py-12 text-center space-y-6 animate-in fade-in duration-300">
-                    <div className="w-14 h-14 mx-auto rounded-full bg-[#c5a059] text-black flex items-center justify-center shadow-xl shadow-[#c5a059]/20">
+                    <div className="w-14 h-14 mx-auto rounded-full bg-accent-gold text-black flex items-center justify-center shadow-xl shadow-accent-gold/20">
                       <Check className="w-7 h-7 stroke-[2.5]" />
                     </div>
                     <div className="space-y-2">
-                      <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#c5a059]">
+                      <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-gold">
                         Inquiry Received
                       </div>
                       <h3 className="font-sans font-bold text-[26px] sm:text-[30px] text-white">
@@ -350,6 +372,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         type="button"
                         onClick={() => {
                           setSubmitted(false);
+                          setSubmitError(null);
                           setFormData({
                             fullName: '',
                             email: '',
