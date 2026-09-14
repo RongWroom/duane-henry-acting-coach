@@ -10,14 +10,22 @@ export const Header: React.FC<HeaderProps> = ({ onBookSession }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    let frame = 0;
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setScrollProgress((window.scrollY / totalHeight) * 100);
-      }
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalHeight > 0) {
+          setScrollProgress((window.scrollY / totalHeight) * 100);
+        }
+        frame = 0;
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   const handleBookClick = () => {
