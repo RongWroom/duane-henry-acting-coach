@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense, useEffect } from 'react';
+import React, { useState, lazy, Suspense, useEffect, useRef, type ReactNode } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { SpotlightCursor } from './components/SpotlightCursor';
@@ -19,6 +19,51 @@ const InquiriesSection = lazy(() =>
 const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })));
 // ReelModal is conditionally rendered so its chunk only loads when opened.
 const ReelModal = lazy(() => import('./components/ReelModal').then(m => ({ default: m.ReelModal })));
+
+interface DeferredSectionProps {
+  children: ReactNode;
+  id?: string;
+  minHeight: string;
+}
+
+const DeferredSection: React.FC<DeferredSectionProps> = ({ children, id, minHeight }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || shouldRender) return;
+
+    if (id && window.location.hash === `#${id}`) {
+      setShouldRender(true);
+      container.scrollIntoView();
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      setShouldRender(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '500px 0px' },
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [id, shouldRender]);
+
+  return (
+    <div ref={containerRef} id={id} style={{ minHeight }}>
+      {shouldRender && <Suspense fallback={null}>{children}</Suspense>}
+    </div>
+  );
+};
 
 export default function App() {
   const [reelModalOpen, setReelModalOpen] = useState(false);
@@ -84,30 +129,30 @@ export default function App() {
         />
 
         {/* Biography */}
-        <Suspense fallback={null}>
+        <DeferredSection id="biography" minHeight="900px">
           <BiographySection />
-        </Suspense>
+        </DeferredSection>
 
         {/* Selected Works & Reel */}
-        <Suspense fallback={null}>
+        <DeferredSection id="works" minHeight="1200px">
           <WorksSection onWatchReel={handleOpenReel} />
-        </Suspense>
+        </DeferredSection>
 
         {/* Coaching & 1-1 Sessions */}
-        <Suspense fallback={null}>
+        <DeferredSection id="coaching" minHeight="900px">
           <CoachingSection onSelectModule={handleSelectModule} />
-        </Suspense>
+        </DeferredSection>
 
         {/* Inquiries & Booking Form */}
-        <Suspense fallback={null}>
+        <DeferredSection id="inquiries" minHeight="1100px">
           <InquiriesSection preselectedObjective={preselectedObjective} />
-        </Suspense>
+        </DeferredSection>
       </main>
 
       {/* Footer */}
-      <Suspense fallback={null}>
+      <DeferredSection minHeight="500px">
         <Footer />
-      </Suspense>
+      </DeferredSection>
 
       {/* Interactive Reel Modal — only rendered when open so the chunk defers */}
       {reelModalOpen && (

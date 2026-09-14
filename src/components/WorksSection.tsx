@@ -68,7 +68,6 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
 
   return (
     <section
-      id="works"
       className="bg-page-bg py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-accent-gold selection:text-black"
     >
       {/* Subtle ambient lighting */}

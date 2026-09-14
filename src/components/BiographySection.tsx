@@ -5,7 +5,6 @@ import { ScrollReveal } from './ScrollReveal';
 export const BiographySection: React.FC = () => {
   return (
     <section
-      id="biography"
       className="bg-page-bg py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-accent-gold selection:text-black"
     >
       {/* Cinematic subtle ambient glow */}

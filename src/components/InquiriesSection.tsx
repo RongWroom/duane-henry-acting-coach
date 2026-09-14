@@ -54,7 +54,6 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
   return (
     <section
-      id="inquiries"
       className="bg-page-bg py-24 md:py-32 border-t border-white/10 text-white relative overflow-hidden selection:bg-accent-gold selection:text-black"
     >
       {/* Cinematic dark teal & gold ambient background glows */}
@@ -225,7 +224,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="Your Name"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
+                          className="w-full bg-white/3 border border-white/10 hover:border-white/20 rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200"
                         />
                       </div>
 
@@ -243,7 +242,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           placeholder="your.email@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
+                          className="w-full bg-white/3 border border-white/10 hover:border-white/20 rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -262,7 +261,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         placeholder="https://www.spotlight.com/... or IMDb link"
                         value={formData.link}
                         onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                        className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200"
+                        className="w-full bg-white/3 border border-white/10 hover:border-white/20 rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200"
                       />
                     </div>
 
@@ -280,7 +279,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                           required
                           value={formData.objective}
                           onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
-                          className="w-full bg-page-bg-alt border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-[#0f1b1e] rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200 cursor-pointer appearance-none pr-10"
+                          className="w-full bg-page-bg-alt border border-white/10 hover:border-white/20 rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200 cursor-pointer appearance-none pr-10"
                         >
                           {COACHING_DATA.modules.map((m) => (
                             <option key={m.id} value={m.title} className="bg-page-bg-alt text-white">
@@ -314,7 +313,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         placeholder="Tell Duane about your upcoming audition sides, project details, or deadlines..."
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        className="w-full bg-white/3 border border-white/10 hover:border-white/20 focus:border-accent-gold focus:bg-white/5 rounded-xl px-4 py-3.5 text-[14px] text-white placeholder:text-zinc-600 focus:outline-none transition-all duration-200 resize-none"
+                        className="w-full bg-white/3 border border-white/10 hover:border-white/20 rounded-xl px-4 py-3.5 text-[14px] text-white focus:outline-none transition-all duration-200 resize-none"
                       />
                     </div>
 
