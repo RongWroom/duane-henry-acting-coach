@@ -13,22 +13,28 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const isHoveredRef = useRef(false);
 
-  // 4 cycles ensure a continuous, uninterrupted marquee track across all display sizes
-  const marqueeItems = [...credits, ...credits, ...credits, ...credits];
+  // 2 cycles ensure a continuous, uninterrupted marquee track across all display sizes
+  const marqueeItems = [...credits, ...credits];
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    // Respect reduced motion settings
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches) return;
+    // Respect reduced motion settings and avoid continuous animation work on touch devices
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const coarsePointer = window.matchMedia('(pointer: coarse)');
+    if (reduceMotion.matches || coarsePointer.matches) return;
 
     let animationFrameId: number;
     let lastTime = performance.now();
     let currentX = 0;
+    let cycleWidth = track.scrollWidth / 2;
     const baseSpeed = 48; // Cinematic, smooth pace (~48px/sec)
     let currentSpeed = baseSpeed;
+
+    const updateCycleWidth = () => {
+      cycleWidth = track.scrollWidth / 2;
+    };
 
     const animate = (time: number) => {
       const dt = Math.min((time - lastTime) / 1000, 0.1);
@@ -41,10 +47,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
 
       currentX -= currentSpeed * dt;
 
-      // Seamless infinite loop based on single cycle width (1/4th of 4 repetitions)
-      const totalWidth = track.scrollWidth;
-      const cycleWidth = totalWidth / 4;
-
+      // Seamless infinite loop based on single cycle width (1/2 of 2 repetitions)
       if (cycleWidth > 0 && Math.abs(currentX) >= cycleWidth) {
         currentX += cycleWidth;
       }
@@ -54,9 +57,11 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    window.addEventListener('resize', updateCycleWidth, { passive: true });
     animationFrameId = requestAnimationFrame(animate);
 
     return () => {
+      window.removeEventListener('resize', updateCycleWidth);
       cancelAnimationFrame(animationFrameId);
     };
   }, [credits]);

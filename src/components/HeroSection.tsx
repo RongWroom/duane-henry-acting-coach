@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="craft"
-      className="relative min-h-[92svh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-page-bg text-white"
+      className="relative min-h-[92vh] supports-[height:100svh]:min-h-[92svh] pt-28 md:pt-32 pb-16 flex flex-col justify-between overflow-hidden bg-page-bg text-white"
     >
       {/* Cinematic dark teal volumetric ambient glow */}
       <div
