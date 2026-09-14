@@ -22,7 +22,7 @@ export const BIOGRAPHY_DATA = {
   author: "DUANE HENRY",
   philosophyLabel: "Approach & Craft",
   metrics: [
-    { value: "15+", label: "YEARS ON SCREEN & STAGE" },
+    { value: "20+", label: "YEARS ON SCREEN & STAGE" },
     { value: "SCREEN NATION", label: "NOMINEE (BEST EMERGING TALENT)" },
     { value: "1-1", label: "PRIVATE SESSIONS" },
   ],
