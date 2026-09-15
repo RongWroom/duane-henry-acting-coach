@@ -46,7 +46,7 @@ export const SELECTED_WORKS_DATA = {
     subheading: "PERFORMANCE RETROSPECTIVE",
     title: "Duane Henry - Theatrical Reel",
     description:
-      "Selected dramatic scenes from CBS's NCIS, Marvel Studios' Captain Marvel, BBC productions, and independent British cinema.",
+      "Selected dramatic scenes from CBS's NCIS, BBC productions, and independent British cinema.",
     duration: "09:58",
     stillUrl:
       "/images/duane_henry_on_stage.jpeg",
