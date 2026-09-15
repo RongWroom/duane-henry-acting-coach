@@ -152,3 +152,18 @@ test('decorative glows do not use Safari-stalling blur filters', async ({ page }
     expect(await glow.evaluate(element => getComputedStyle(element).maskImage)).toContain('radial-gradient');
   }
 });
+
+test('the works marquee auto-scrolls on touch devices', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'The marquee animation is specifically verified on mobile projects.');
+
+  await page.goto('/');
+  await page.locator('#works').scrollIntoViewIfNeeded();
+  await expect(page.locator('#works section')).toBeVisible();
+
+  const track = page.locator('#works .will-change-transform');
+  const readTransform = () => track.evaluate((element) => (element as HTMLElement).style.transform);
+  await expect.poll(readTransform).toMatch(/translate3d/);
+  const before = await readTransform();
+  await page.waitForTimeout(300);
+  expect(await readTransform()).not.toBe(before);
+});

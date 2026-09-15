@@ -20,10 +20,9 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
     const track = trackRef.current;
     if (!track) return;
 
-    // Respect reduced motion settings and avoid continuous animation work on touch devices
+    // Respect reduced motion settings; touch devices still auto-scroll and pause while touched.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const coarsePointer = window.matchMedia('(pointer: coarse)');
-    if (reduceMotion.matches || coarsePointer.matches) return;
+    if (reduceMotion.matches) return;
 
     let animationFrameId: number;
     let lastTime = performance.now();
