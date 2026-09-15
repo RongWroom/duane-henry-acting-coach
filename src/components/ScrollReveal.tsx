@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import React, { useEffect, useRef } from 'react';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -9,6 +8,8 @@ interface ScrollRevealProps {
   yOffset?: number;
 }
 
+// Content is always visible, including before hydration and if observation fails.
+// On desktop, movement is a progressive enhancement; it never controls opacity.
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   className = '',
@@ -16,102 +17,31 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   duration = 0.65,
   yOffset = 28,
 }) => {
-  const shouldReduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
 
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !('IntersectionObserver' in window) || !element.animate) return;
+    const media = window.matchMedia('(prefers-reduced-motion: no-preference) and (pointer: fine)');
+    if (!media.matches) return;
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: yOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.16, 1, 0.3, 1], // Smooth modern cubic-bezier easeOut
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
+    let animation: Animation | undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      if (media.matches) {
+        animation = element.animate(
+          [{ transform: `translateY(${yOffset}px)` }, { transform: 'translateY(0)' }],
+          { duration: duration * 1000, delay: delay * 1000, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+        );
+      }
+      observer.disconnect();
+    });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      animation?.cancel();
+    };
+  }, [delay, duration, yOffset]);
 
-interface StaggerContainerProps {
-  children: React.ReactNode;
-  className?: string;
-  staggerDelay?: number;
-  delayStart?: number;
-}
-
-export const StaggerContainer: React.FC<StaggerContainerProps> = ({
-  children,
-  className = '',
-  staggerDelay = 0.12,
-  delayStart = 0.05,
-}) => {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-50px' }}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-            delayChildren: delayStart,
-          },
-        },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-interface StaggerItemProps {
-  children: React.ReactNode;
-  className?: string;
-  yOffset?: number;
-}
-
-export const StaggerItem: React.FC<StaggerItemProps> = ({
-  children,
-  className = '',
-  yOffset = 24,
-}) => {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: yOffset },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.6,
-            ease: [0.16, 1, 0.3, 1],
-          },
-        },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div ref={ref} className={className}>{children}</div>;
 };

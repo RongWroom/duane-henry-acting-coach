@@ -2,17 +2,7 @@ import React from 'react';
 import { ArrowDown, ArrowRight, Play } from 'lucide-react';
 import { HERO_DATA } from '../data/portfolioData';
 
-interface HeroSectionProps {
-  onExploreCoaching: () => void;
-  onWatchReel?: () => void;
-  onBookSession?: () => void;
-}
-
-export const HeroSection: React.FC<HeroSectionProps> = ({
-  onExploreCoaching,
-  onWatchReel,
-  onBookSession,
-}) => {
+export const HeroSection: React.FC = () => {
   return (
     <section
       id="craft"
@@ -72,32 +62,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div>
               {/* Clean CTA Group */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                {onBookSession && (
-                  <button
-                    onClick={onBookSession}
-                    className="px-7 py-3.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200"
-                  >
-                    Book a Session
-                  </button>
-                )}
+                <a
+                  href="#inquiries"
+                  className="px-7 py-3.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200"
+                >
+                  Book a Session
+                </a>
 
-                {onWatchReel && (
-                  <button
-                    onClick={onWatchReel}
-                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 text-white hover:bg-white/5 text-[12px] font-semibold tracking-[0.14em] uppercase transition-all duration-200"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current text-accent-gold" />
-                    <span>Watch Reel</span>
-                  </button>
-                )}
+                <a
+                  href="#works"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/20 hover:border-white/50 text-white hover:bg-white/5 text-[12px] font-semibold tracking-[0.14em] uppercase transition-all duration-200"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current text-accent-gold" />
+                  <span>Watch Reel</span>
+                </a>
 
-                <button
-                  onClick={onExploreCoaching}
+                <a
+                  href="#coaching"
                   className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] uppercase text-zinc-400 hover:text-white transition-colors px-3 py-3"
                 >
                   <span>Explore Coaching</span>
                   <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                </a>
               </div>
             </div>
           </div>

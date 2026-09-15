@@ -17,6 +17,9 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     notes: '',
   });
 
+  const [isInteractive, setIsInteractive] = useState(false);
+  useEffect(() => setIsInteractive(true), []);
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -326,7 +329,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
                       <button
                         type="submit"
-                        disabled={isSubmitting}
+                        disabled={!isInteractive || isSubmitting}
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-lg hover:shadow-accent-gold/20 disabled:opacity-50"
                       >
                         {isSubmitting ? (
