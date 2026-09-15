@@ -11,4 +11,4 @@ if (!template.includes(marker)) {
 }
 const html = renderToString(<StrictMode><App /></StrictMode>);
 await writeFile(output, template.replace(marker, () => `<div id="root">${html}</div>`));
-console.log('Prerendered the complete page into dist/index.html.');
+console.log('Prerendered the page shell into dist/index.html.');

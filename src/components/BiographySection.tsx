@@ -22,7 +22,7 @@ export const BiographySection: React.FC = () => {
               <span className="w-8 h-px bg-white/15" />
               <span className="text-white">THE BIOGRAPHY</span>
             </div>
-            <span className="text-zinc-500">{BIOGRAPHY_DATA.subtitle}</span>
+            <span className="text-zinc-400">{BIOGRAPHY_DATA.subtitle}</span>
           </div>
         </ScrollReveal>
 

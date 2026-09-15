@@ -1,18 +1,70 @@
-import React, { useState, lazy, Suspense, useEffect } from 'react';
+import React, { useEffect, useRef, useState, lazy, Suspense, type ReactNode } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 
-// Page content is rendered into the production HTML at build time. Only optional
-// interactions and decoration may load lazily; scrolling never fetches content.
-import { BiographySection } from './components/BiographySection';
-import { WorksSection } from './components/WorksSection';
-import { CoachingSection } from './components/CoachingSection';
-import { InquiriesSection } from './components/InquiriesSection';
-import { Footer } from './components/Footer';
+// Below-the-fold sections load as they approach the viewport.
+const BiographySection = lazy(() =>
+  import('./components/BiographySection').then((module) => ({ default: module.BiographySection })),
+);
+const WorksSection = lazy(() =>
+  import('./components/WorksSection').then((module) => ({ default: module.WorksSection })),
+);
+const CoachingSection = lazy(() =>
+  import('./components/CoachingSection').then((module) => ({ default: module.CoachingSection })),
+);
+const InquiriesSection = lazy(() =>
+  import('./components/InquiriesSection').then((module) => ({ default: module.InquiriesSection })),
+);
+const Footer = lazy(() => import('./components/Footer').then((module) => ({ default: module.Footer })));
 
 const SpotlightCursor = lazy(() =>
-  import('./components/SpotlightCursor').then(m => ({ default: m.SpotlightCursor })),
+  import('./components/SpotlightCursor').then((module) => ({ default: module.SpotlightCursor })),
 );
+
+interface DeferredSectionProps {
+  children: ReactNode;
+  id?: string;
+  minHeight: string;
+}
+
+const DeferredSection: React.FC<DeferredSectionProps> = ({ children, id, minHeight }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || shouldRender) return;
+
+    if (id && window.location.hash === `#${id}`) {
+      setShouldRender(true);
+      container.scrollIntoView();
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      setShouldRender(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setShouldRender(true);
+        observer.disconnect();
+      },
+      { rootMargin: '500px 0px' },
+    );
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, [id, shouldRender]);
+
+  return (
+    <div ref={containerRef} id={id} style={{ minHeight }}>
+      {shouldRender && <Suspense fallback={null}>{children}</Suspense>}
+    </div>
+  );
+};
 
 export default function App() {
   const [preselectedObjective, setPreselectedObjective] = useState<string>(
@@ -63,30 +115,30 @@ export default function App() {
         <HeroSection />
 
         {/* Biography */}
-        <div id="biography">
+        <DeferredSection id="biography" minHeight="900px">
           <BiographySection />
-        </div>
+        </DeferredSection>
 
         {/* Selected Works & Reel */}
-        <div id="works">
+        <DeferredSection id="works" minHeight="1200px">
           <WorksSection />
-        </div>
+        </DeferredSection>
 
         {/* Coaching & 1-1 Sessions */}
-        <div id="coaching">
+        <DeferredSection id="coaching" minHeight="900px">
           <CoachingSection onSelectModule={handleSelectModule} />
-        </div>
+        </DeferredSection>
 
         {/* Inquiries & Booking Form */}
-        <div id="inquiries">
+        <DeferredSection id="inquiries" minHeight="1100px">
           <InquiriesSection preselectedObjective={preselectedObjective} />
-        </div>
+        </DeferredSection>
       </main>
 
       {/* Footer */}
-      <div>
+      <DeferredSection id="footer" minHeight="500px">
         <Footer />
-      </div>
+      </DeferredSection>
     </div>
   );
 }

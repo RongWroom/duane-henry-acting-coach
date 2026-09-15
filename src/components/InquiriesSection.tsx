@@ -78,7 +78,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
               <span className="w-8 h-px bg-white/15" />
               <span className="text-white">PRIVATE INQUIRIES &amp; BOOKING</span>
             </div>
-            <span className="text-zinc-500">LONDON • LOS ANGELES • VIRTUAL</span>
+            <span className="text-zinc-400">LONDON • LOS ANGELES • VIRTUAL</span>
           </div>
         </ScrollReveal>
 
@@ -110,7 +110,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-7 gap-x-6 py-8 border-y border-white/10">
                 {/* LOCATIONS */}
                 <div>
-                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2 flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Locations</span>
                   </div>
@@ -123,7 +123,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
                 {/* URGENT CASTING */}
                 <div>
-                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2 flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Audition Deadlines</span>
                   </div>
@@ -134,7 +134,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
                 {/* CONFIDENTIALITY */}
                 <div>
-                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2 flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Confidentiality</span>
                   </div>
@@ -145,7 +145,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
                 {/* DIRECT EMAIL */}
                 <div>
-                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-500 mb-2 flex items-center gap-1.5">
+                  <div className="text-[11px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2 flex items-center gap-1.5">
                     <Mail className="w-3.5 h-3.5 text-accent-gold" />
                     <span>Direct Inquiries</span>
                   </div>
@@ -171,7 +171,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                   <p className="font-serif italic text-[14px] sm:text-[15px] leading-[1.6] text-zinc-300">
                     Acting is not about pretending; it is about uncovering the undeniable truth under intense pressure.
                   </p>
-                  <span className="block text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-500 mt-2">
+                  <span className="block text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-400 mt-2">
                     — Duane Henry
                   </span>
                 </div>
@@ -256,7 +256,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         htmlFor="link"
                         className="block text-[11px] font-semibold tracking-[0.14em] uppercase text-zinc-400 mb-2"
                       >
-                        Spotlight / IMDb / Showreel Link <span className="text-zinc-500 font-normal lowercase tracking-normal">(optional)</span>
+                        Spotlight / IMDb / Showreel Link <span className="text-zinc-400 font-normal lowercase tracking-normal">(optional)</span>
                       </label>
                       <input
                         id="link"

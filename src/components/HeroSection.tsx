@@ -92,16 +92,23 @@ export const HeroSection: React.FC = () => {
           <div className="lg:col-span-5 order-2 flex justify-center">
             <div className="relative w-full max-w-sm sm:max-w-md">
               <div className="relative aspect-3/4 w-full rounded-xl overflow-hidden bg-card-bg border border-white/10 shadow-2xl group">
-                <img
-                  src={HERO_DATA.portraitUrl}
-                  alt="Duane Henry, actor and private acting coach"
-                  width="937"
-                  height="1238"
-                  className="w-full h-full object-cover grayscale contrast-110 transition-transform duration-1000 ease-out group-hover:scale-105"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
+                <picture className="block w-full h-full">
+                  <source
+                    type="image/avif"
+                    srcSet="/images/duanehenry-480.avif 363w, /images/duanehenry-720.avif 545w, /images/duanehenry-937.avif 937w"
+                    sizes="(max-width: 639px) calc(100vw - 48px), 448px"
+                  />
+                  <img
+                    src={HERO_DATA.portraitUrl}
+                    alt="Duane Henry, actor and private acting coach"
+                    width="937"
+                    height="1238"
+                    className="w-full h-full object-cover grayscale contrast-110 transition-transform duration-1000 ease-out group-hover:scale-105"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                  />
+                </picture>
 
                 {/* Subtle vignette */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />

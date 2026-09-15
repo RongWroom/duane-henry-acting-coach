@@ -5,14 +5,12 @@ Run `npm run test:loading` to build and test the production output.
 
 The tests cover mobile WebKit, mobile Chromium, and desktop WebKit:
 
-- Actual page content and anchor navigation with JavaScript disabled.
-- First paint while every JavaScript download is stalled, followed by hydration without replacing the content or reporting errors.
-- Visible sections when IntersectionObserver never delivers a callback; no section scripts requested on scroll.
-- Coaching selection and inquiry submission after hydration. The email endpoint is mocked; tests never send email.
+- The hero and stable section placeholders with JavaScript disabled; below-the-fold content is intentionally loaded by JavaScript as it approaches the viewport.
+- First paint while JavaScript is stalled, followed by hydration and loading of the first deferred section without replacing the hero.
+- One code-split section chunk per IntersectionObserver activation while scrolling, including anchor navigation and the booking flow.
+- Coaching selection and inquiry submission after the relevant sections hydrate. The email endpoint is mocked; tests never send email.
 
-Production must use `npm run build`, including its prerender step. Deploy the resulting `dist` directory. Running `vite build` alone omits the HTML content.
-
-These checks reproduce and prevent the application's empty-content failure modes. They do not measure a physical iPhone's connection or identify why Safari on a particular device takes 10–15 seconds to fetch or execute a resource.
+Production must use `npm run build`, including its prerender step. Deploy the resulting `dist` directory. The prerender step writes the hero and reserved section space into `dist/index.html`; section content is loaded by the client as it approaches the viewport.
 
 ## iOS Safari rendering regression
 

@@ -19,17 +19,24 @@ async function expectContent(page: Page) {
 
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
-  test('the real page and anchor navigation work with JavaScript disabled', async ({ page }) => {
-  await page.goto('http://127.0.0.1:43861/');
-  await expectContent(page);
-  await page.locator('#craft').getByRole('link', { name: 'Explore Coaching' }).click();
-  await expect(page).toHaveURL(/#coaching$/);
-  await expect(page.locator('#coaching')).toBeInViewport();
-  await expect(page.locator('button[type=submit]')).toBeDisabled();
+  test('the hero and stable lazy-loading placeholders render without JavaScript', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('h1')).toContainText('DUANE HENRY');
+
+    for (const id of ['biography', 'works', 'coaching', 'inquiries']) {
+      const section = page.locator(`#${id}`);
+      await expect(section).toBeVisible();
+      await expect(section.locator('section')).toHaveCount(0);
+    }
+
+    await page.locator('#craft').getByRole('link', { name: 'Explore Coaching' }).click();
+    await expect(page).toHaveURL(/#coaching$/);
+    await expect(page.locator('#coaching')).toBeInViewport();
+    await expect(page.locator('button[type=submit]')).toHaveCount(0);
   });
 });
 
-test('content paints while JavaScript is stalled, then hydrates without replacing it', async ({ page }) => {
+test('the hero paints while JavaScript is stalled, then the first section loads after hydration and scroll', async ({ page }) => {
   let release!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const errors: string[] = [];
@@ -38,45 +45,86 @@ test('content paints while JavaScript is stalled, then hydrates without replacin
   await page.route(/\.js(?:\?|$)/, async route => { await gate; await route.continue(); });
   try {
     await page.goto('/', { waitUntil: 'commit' });
-    await expectContent(page);
+    await expect(page.locator('h1')).toContainText('DUANE HENRY');
+    await expect(page.locator('#biography section')).toHaveCount(0);
     await page.waitForFunction(() => performance.getEntriesByName('first-contentful-paint').length > 0);
     console.log('First paint with scripts stalled:', await page.evaluate(() => performance.getEntriesByName('first-contentful-paint')[0].startTime));
     await page.evaluate(() => { (window as any).__originalHero = document.querySelector('h1'); });
-    await expect(page.locator('button[type=submit]')).toBeDisabled();
   } finally { release(); }
-  await expect(page.locator('button[type=submit]')).toBeEnabled();
+  await page.locator('#biography').scrollIntoViewIfNeeded();
+  await expect(page.locator('#biography section')).toBeVisible();
   expect(await page.evaluate(() => (window as any).__originalHero === document.querySelector('h1'))).toBe(true);
   expect(errors).toEqual([]);
 });
 
-test('scrolling needs no section downloads or observer callbacks', async ({ page, isMobile }) => {
+test('sections load one chunk at a time when their scroll observers intersect', async ({ page }) => {
   await page.addInitScript(() => {
-    window.IntersectionObserver = class {
-      root = null; rootMargin = '0px'; thresholds = [0];
-      observe() {} unobserve() {} disconnect() {} takeRecords() { return []; }
-    } as unknown as typeof IntersectionObserver;
+    const observers = new Set<any>();
+
+    class TestIntersectionObserver {
+      root = null;
+      rootMargin = '0px';
+      thresholds = [0];
+      target: Element | null = null;
+      callback: any;
+
+      constructor(callback: any, options?: IntersectionObserverInit) {
+        this.callback = callback;
+        this.rootMargin = options?.rootMargin ?? '0px';
+        observers.add(this);
+      }
+
+      observe(target: Element) {
+        this.target = target;
+      }
+
+      unobserve() {}
+      disconnect() {}
+      takeRecords() { return []; }
+    }
+
+    (window as any).IntersectionObserver = TestIntersectionObserver;
+    (window as any).__intersect = (id: string) => {
+      for (const observer of observers) {
+        if (observer.target?.id !== id) continue;
+        observer.callback(
+          [{ isIntersecting: true, target: observer.target } as IntersectionObserverEntry],
+          observer,
+        );
+      }
+    };
   });
+
   const scripts: string[] = [];
   page.on('request', request => { if (request.resourceType() === 'script') scripts.push(request.url()); });
   await page.goto('/');
-  await expect(page.locator('button[type=submit]')).toBeEnabled();
+  await expect(page.locator('h1')).toContainText('DUANE HENRY');
+  expect(scripts.filter(url => /BiographySection|WorksSection|CoachingSection|InquiriesSection|Footer/.test(url))).toEqual([]);
+
   for (const id of ['biography', 'works', 'coaching', 'inquiries']) {
     await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+    await page.evaluate((sectionId) => (window as any).__intersect(sectionId), id);
+    await expect(page.locator(`#${id} section`)).toBeVisible();
+    await expect.poll(() => scripts.some(url => url.includes(`${id[0].toUpperCase()}${id.slice(1)}Section`))).toBe(true);
   }
+
+  await page.locator('#footer').scrollIntoViewIfNeeded();
+  await page.evaluate(() => (window as any).__intersect('footer'));
+  await expect(page.locator('#footer footer')).toBeVisible();
+  await expect.poll(() => scripts.some(url => url.includes('Footer'))).toBe(true);
   await expectContent(page);
-  expect(scripts.filter(url => /BiographySection|WorksSection|CoachingSection|InquiriesSection|ScrollReveal/.test(url))).toEqual([]);
-  if (isMobile) expect(scripts.filter(url => /motion-|SpotlightCursor/.test(url))).toEqual([]);
 });
 
-test('booking selection and submission still work after hydration', async ({ page }) => {
+test('booking selection and submission still work after deferred sections hydrate', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   // Never send a real inquiry from a regression test.
   await page.route('**/api/send-email', route => route.fulfill({ json: { success: true } }));
   await page.goto('/#coaching');
-  await expect(page.locator('button[type=submit]')).toBeEnabled();
+  await expect(page.locator('#coaching section')).toBeVisible();
   await page.getByRole('button', { name: /02 Audition/ }).click();
   await page.getByRole('button', { name: 'Book This Session', exact: true }).click();
+  await expect(page.locator('button[type=submit]')).toBeEnabled();
   await expect(page.locator('#objective')).toHaveValue('Audition & Self-Tape Prep');
   await page.locator('#fullName').fill('Loading Regression Test');
   await page.locator('#email').fill('test@example.com');
@@ -85,9 +133,13 @@ test('booking selection and submission still work after hydration', async ({ pag
   expect(errors).toEqual([]);
 });
 
-
 test('decorative glows do not use Safari-stalling blur filters', async ({ page }) => {
   await page.goto('/');
+  for (const id of ['biography', 'works', 'coaching', 'inquiries']) {
+    await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+    await expect(page.locator(`#${id} section`)).toBeVisible();
+  }
+
   await expect(page.locator('.ambient-glow')).toHaveCount(6);
   const expensiveBlurs = await page.evaluate(() => [...document.querySelectorAll('*')].flatMap(element => {
     const filter = getComputedStyle(element).filter;

@@ -36,7 +36,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
               <span className="w-8 h-px bg-white/15" />
               <span className="text-white">{sectionTitle}</span>
             </div>
-            <span className="text-zinc-500">{subtitle}</span>
+            <span className="text-zinc-400">{subtitle}</span>
           </div>
         </ScrollReveal>
 
@@ -71,7 +71,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                 <p className="text-[14px] leading-relaxed text-zinc-300 font-normal">
                   {sessionLocations.text}
                 </p>
-                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-zinc-500">
+                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-zinc-400">
                   <span>Online / In Person</span>
                   <span>London &amp; LA In-Person</span>
                 </div>
@@ -82,7 +82,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
           {/* Right Column (7 cols): Clean Session Accordion */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
             <ScrollReveal delay={0.15}>
-              <div className="text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-500 mb-2">
+              <div className="text-[11px] font-semibold tracking-[0.16em] uppercase text-zinc-400 mb-2">
                 Available Coaching Sessions
               </div>
             </ScrollReveal>
@@ -134,7 +134,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
                         {/* Focus Areas */}
                         {item.focusAreas && (
                           <div className="mt-5 flex flex-wrap items-center gap-2">
-                            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 mr-1">
+                            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mr-1">
                               Areas Covered:
                             </span>
                             {item.focusAreas.map((tag) => (

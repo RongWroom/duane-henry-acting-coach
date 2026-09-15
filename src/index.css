@@ -4,11 +4,7 @@
 @import "@fontsource/plus-jakarta-sans/latin-500.css";
 @import "@fontsource/plus-jakarta-sans/latin-600.css";
 @import "@fontsource/plus-jakarta-sans/latin-700.css";
-@import "@fontsource/plus-jakarta-sans/latin-800.css";
-@import "@fontsource/playfair-display/latin-400.css";
 @import "@fontsource/playfair-display/latin-400-italic.css";
-@import "@fontsource/playfair-display/latin-600.css";
-@import "@fontsource/playfair-display/latin-600-italic.css";
 
 @theme {
   --color-page-bg: #070c0d;

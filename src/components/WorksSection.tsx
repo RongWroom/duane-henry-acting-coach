@@ -85,7 +85,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
               <span className="w-8 h-px bg-white/15" />
               <span className="text-white">{sectionTitle}</span>
             </div>
-            <span className="text-zinc-500">{subtitle}</span>
+            <span className="text-zinc-400">{subtitle}</span>
           </div>
         </ScrollReveal>
 
@@ -120,8 +120,17 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
             ) : (
               /* Poster State with Editorial Text Overlay on Page Load */
               <div
+                role="button"
+                tabIndex={0}
+                aria-label="Play Duane Henry's demo reel"
                 onClick={() => setIsPlaying(true)}
-                className="relative w-full h-full min-h-95 sm:min-h-0 cursor-pointer flex flex-col justify-between p-5 sm:p-7 md:p-8"
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setIsPlaying(true);
+                  }
+                }}
+                className="relative w-full h-full min-h-95 sm:min-h-0 cursor-pointer flex flex-col justify-between p-5 sm:p-7 md:p-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold"
               >
                 <picture className="absolute inset-0">
                   <source
@@ -175,17 +184,13 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                   </div>
 
                   <div className="hidden sm:block shrink-0">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsPlaying(true);
-                      }}
-                      className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-accent-gold text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-200 shadow-xl cursor-pointer"
+                    <span
+                      aria-hidden="true"
+                      className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-accent-gold text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-200 shadow-xl"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
                       <span>Play Reel</span>
-                    </button>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -202,7 +207,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                 <span className="w-2 h-2 rounded-full bg-accent-gold" />
                 <span>Filmography &amp; Stage Performance</span>
               </div>
-              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-zinc-500">
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-zinc-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Hover to pause</span>
               </div>
@@ -280,7 +285,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-white/10 text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-500 group-hover:text-zinc-400 transition-colors flex items-center justify-between">
+                      <div className="pt-4 border-t border-white/10 text-[11px] font-medium tracking-[0.14em] uppercase text-zinc-400 group-hover:text-zinc-400 transition-colors flex items-center justify-between">
                         <span>{credit.networkOrStudio}</span>
                         {credit.imdbUrl ? (
                           <a
@@ -288,6 +293,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-400 hover:text-accent-gold transition-colors"
+                            aria-label={`View ${credit.title} on IMDb`}
                             title={`View ${credit.title} on IMDb`}
                           >
                             <span>IMDb</span>
