@@ -61,11 +61,11 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
     >
       {/* Cinematic dark teal & gold ambient background glows */}
       <div
-        className="absolute -bottom-24 -left-20 w-137.5 h-137.5 bg-[#0e2c2b]/25 rounded-full blur-[160px] pointer-events-none"
+        className="absolute -bottom-24 -left-20 w-137.5 h-137.5 bg-[#0e2c2b]/25 rounded-full ambient-glow pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute top-12 right-0 w-112.5 h-112.5 bg-accent-gold/5 rounded-full blur-[140px] pointer-events-none"
+        className="absolute top-12 right-0 w-112.5 h-112.5 bg-accent-gold/5 rounded-full ambient-glow pointer-events-none"
         aria-hidden="true"
       />
 

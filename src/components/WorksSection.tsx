@@ -72,7 +72,7 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
     >
       {/* Subtle ambient lighting */}
       <div
-        className="absolute top-1/4 -right-20 w-112.5 h-112.5 bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-1/4 -right-20 w-112.5 h-112.5 bg-[#0e2c2b]/20 rounded-full ambient-glow pointer-events-none"
         aria-hidden="true"
       />
 

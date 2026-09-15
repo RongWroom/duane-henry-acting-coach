@@ -9,7 +9,7 @@ export const BiographySection: React.FC = () => {
     >
       {/* Cinematic subtle ambient glow */}
       <div
-        className="absolute top-1/3 -right-24 w-125 h-125 bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-1/3 -right-24 w-125 h-125 bg-[#0e2c2b]/20 rounded-full ambient-glow pointer-events-none"
         aria-hidden="true"
       />
 

@@ -36,6 +36,14 @@
 }
 
 @layer utilities {
+  /* Large CSS Gaussian blurs can stall Safari's first frame, including its
+     page-color snapshots. A radial alpha mask draws the soft glow directly
+     without a blur filter. See WebKit bugs 315118 and 322045. */
+  .ambient-glow {
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #0009 25%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center, #000 0%, #0009 25%, transparent 70%);
+  }
+
   .glass-header {
     background: rgba(7, 12, 13, 0.94);
     backdrop-filter: blur(12px);

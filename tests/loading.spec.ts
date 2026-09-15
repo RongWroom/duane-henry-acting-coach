@@ -84,3 +84,19 @@ test('booking selection and submission still work after hydration', async ({ pag
   await expect(page.locator('#inquiries')).toContainText(/received|thank|sent/i);
   expect(errors).toEqual([]);
 });
+
+
+test('decorative glows do not use Safari-stalling blur filters', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.ambient-glow')).toHaveCount(6);
+  const expensiveBlurs = await page.evaluate(() => [...document.querySelectorAll('*')].flatMap(element => {
+    const filter = getComputedStyle(element).filter;
+    const radius = /blur\(([^)]+)px\)/.exec(filter);
+    return radius && Number(radius[1]) >= 64 ? [{ tag: element.tagName, }] : [];
+  }));
+  expect(expensiveBlurs).toEqual([]);
+  for (const glow of await page.locator('.ambient-glow').all()) {
+    await expect(glow).toHaveCSS('filter', 'none');
+    expect(await glow.evaluate(element => getComputedStyle(element).maskImage)).toContain('radial-gradient');
+  }
+});

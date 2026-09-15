@@ -23,7 +23,7 @@ export const CoachingSection: React.FC<CoachingSectionProps> = ({ onSelectModule
     >
       {/* Subtle ambient lighting */}
       <div
-        className="absolute top-1/2 -left-20 w-125 h-125 bg-[#0e2c2b]/20 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-1/2 -left-20 w-125 h-125 bg-[#0e2c2b]/20 rounded-full ambient-glow pointer-events-none"
         aria-hidden="true"
       />
 

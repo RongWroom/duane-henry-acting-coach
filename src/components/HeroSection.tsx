@@ -10,7 +10,7 @@ export const HeroSection: React.FC = () => {
     >
       {/* Cinematic dark teal volumetric ambient glow */}
       <div
-        className="absolute top-20 right-10 w-137.5 h-137.5 bg-[#0e2c2b]/35 rounded-full blur-[160px] pointer-events-none"
+        className="absolute top-20 right-10 w-137.5 h-137.5 bg-[#0e2c2b]/35 rounded-full ambient-glow pointer-events-none"
         aria-hidden="true"
       />
 
