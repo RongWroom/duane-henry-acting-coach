@@ -131,22 +131,15 @@ export const WorksSection: React.FC<WorksSectionProps> = () => {
                 }}
                 className="relative w-full h-full min-h-95 sm:min-h-0 cursor-pointer flex flex-col justify-between p-5 sm:p-7 md:p-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold"
               >
-                <picture className="absolute inset-0">
-                  <source
-                    type="image/avif"
-                    srcSet="/images/duane-henry-stage-768.avif 768w, /images/duane-henry-stage-1280.avif 1280w"
-                    sizes="(max-width: 767px) calc(100vw - 48px), 1152px"
-                  />
-                  <img
-                    src={featuredReel.stillUrl}
-                    alt="Duane Henry performing on stage"
-                    width="1672"
-                    height="941"
-                    className="w-full h-full object-cover object-center brightness-[0.75] transition-transform duration-1000 ease-out group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
+                <img
+                  src={featuredReel.stillUrl}
+                  alt="Duane Henry performing on stage"
+                  width="1672"
+                  height="941"
+                  className="absolute inset-0 w-full h-full object-cover object-center brightness-[0.75] transition-transform duration-1000 ease-out group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
 
                 {/* Multilayer gradient for crystal clear contrast behind text & stage photo */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/45 to-black/25 pointer-events-none" />
