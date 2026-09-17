@@ -1,8 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { ConsultationFormData } from '../types';
 import { Check, ShieldCheck, Clock, MapPin, Mail, ArrowRight, ChevronDown } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { COACHING_DATA } from '../data/portfolioData';
+
+// Cloudflare Turnstile site key — public by design, safe to ship in the bundle.
+// Set VITE_TURNSTILE_SITE_KEY to override (e.g. Cloudflare's always-pass test
+// key 1x00000000000000000000AA for local development).
+const TURNSTILE_SITE_KEY =
+  import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAAE67gN3pgLNdvTaF';
 
 interface InquiriesSectionProps {
   preselectedObjective?: string;
@@ -23,6 +30,8 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   useEffect(() => {
     if (preselectedObjective) {
@@ -32,6 +41,10 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      setSubmitError('Please complete the verification check before submitting.');
+      return;
+    }
     setIsSubmitting(true);
     setSubmitError(null);
 
@@ -39,7 +52,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       if (!response.ok) {
@@ -50,6 +63,9 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
       setSubmitted(true);
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : 'Failed to send inquiry. Please try again.');
+      // Turnstile tokens are single-use — reset so the widget issues a fresh one.
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
     } finally {
       setIsSubmitting(false);
     }
@@ -320,6 +336,21 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                       />
                     </div>
 
+                    {/* Cloudflare Turnstile verification */}
+                    <div className="flex justify-end">
+                      <Turnstile
+                        ref={turnstileRef}
+                        siteKey={TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => setTurnstileToken(token)}
+                        onExpire={() => setTurnstileToken(null)}
+                        onError={() => {
+                          setTurnstileToken(null);
+                          setSubmitError('Verification failed to load. Please refresh the page and try again.');
+                        }}
+                        options={{ theme: 'dark' }}
+                      />
+                    </div>
+
                     {/* Submit Bar */}
                     <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
                       <div className="flex items-center gap-2 text-[12px] text-zinc-400">
@@ -329,7 +360,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
                       <button
                         type="submit"
-                        disabled={!isInteractive || isSubmitting}
+                        disabled={!isInteractive || isSubmitting || !turnstileToken}
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black hover:bg-accent-gold hover:text-black text-[12px] font-bold tracking-[0.14em] uppercase transition-all duration-200 cursor-pointer shadow-lg hover:shadow-accent-gold/20 disabled:opacity-50"
                       >
                         {isSubmitting ? (
@@ -375,6 +406,7 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
                         onClick={() => {
                           setSubmitted(false);
                           setSubmitError(null);
+                          setTurnstileToken(null);
                           setFormData({
                             fullName: '',
                             email: '',

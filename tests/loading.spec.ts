@@ -120,6 +120,20 @@ test('booking selection and submission still work after deferred sections hydrat
   page.on('pageerror', error => errors.push(error.message));
   // Never send a real inquiry from a regression test.
   await page.route('**/api/send-email', route => route.fulfill({ json: { success: true } }));
+  // Stub the Turnstile widget so the test doesn't depend on Cloudflare.
+  await page.route('**/challenges.cloudflare.com/**', route =>
+    route.fulfill({ contentType: 'application/javascript', body: '' }));
+  await page.addInitScript(() => {
+    (window as any).turnstile = {
+      render: (_container: HTMLElement, options: { callback?: (token: string) => void }) => {
+        options.callback?.('test-turnstile-token');
+        return 'test-widget';
+      },
+      reset: () => {},
+      remove: () => {},
+      getResponse: () => 'test-turnstile-token',
+    };
+  });
   await page.goto('/#coaching');
   await expect(page.locator('#coaching section')).toBeVisible();
   await page.getByRole('button', { name: /02 Audition/ }).click();

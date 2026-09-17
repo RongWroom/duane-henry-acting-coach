@@ -18,6 +18,7 @@ interface InquiryPayload {
   link?: string;
   objective?: string;
   notes?: string;
+  turnstileToken?: string;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -27,11 +28,42 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { fullName, email, link, objective, notes } = (req.body ?? {}) as InquiryPayload;
+  const { fullName, email, link, objective, notes, turnstileToken } = (req.body ?? {}) as InquiryPayload;
 
   // Validate required fields.
   if (!fullName || !email) {
     return res.status(400).json({ error: 'Full name and email are required.' });
+  }
+
+  // Verify the Cloudflare Turnstile token before sending any email.
+  if (!turnstileToken) {
+    return res.status(400).json({ error: 'Verification is required.' });
+  }
+
+  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+  if (!turnstileSecret) {
+    console.error('TURNSTILE_SECRET_KEY environment variable is not set.');
+    return res.status(500).json({ error: 'Email service is not configured.' });
+  }
+
+  try {
+    const forwardedFor = req.headers['x-forwarded-for'];
+    const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: turnstileSecret,
+        response: turnstileToken,
+        remoteip: typeof forwardedFor === 'string' ? forwardedFor.split(',')[0].trim() : undefined,
+      }),
+    });
+    const outcome = (await verification.json()) as { success?: boolean };
+    if (!outcome.success) {
+      return res.status(403).json({ error: 'Verification failed. Please try again.' });
+    }
+  } catch (error) {
+    console.error('Turnstile verification request failed:', error);
+    return res.status(500).json({ error: 'Verification failed. Please try again.' });
   }
 
   const apiKey = process.env.RESEND_API_KEY;

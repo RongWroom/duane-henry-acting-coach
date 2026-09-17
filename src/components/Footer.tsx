@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, X, Shield, FileText } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { LegalModal } from './LegalModal';
+import { LEGAL_DOCUMENTS } from '../data/legalContent';
 
 export const Footer: React.FC = () => {
   const [activeModal, setActiveModal] = useState<'terms' | 'privacy' | null>(null);
@@ -196,91 +198,12 @@ export const Footer: React.FC = () => {
         </div>
       </footer>
 
-      {/* Modal for Terms of Service */}
-      {activeModal === 'terms' && (
-        <div className="fixed inset-0 z-10001 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-xl bg-page-bg-alt border border-white/15 rounded-2xl p-6 sm:p-8 text-white shadow-2xl">
-            <button
-              onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="flex items-center gap-2.5 text-accent-gold mb-3">
-              <FileText className="w-5 h-5" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase">
-                Legal & Representation
-              </span>
-            </div>
-            <h3 className="font-sans font-bold text-[22px] text-white mb-4">
-              Terms of Coaching Service
-            </h3>
-            <div className="text-[13px] text-zinc-300 space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
-              <p>
-                <strong>1. Coaching Relationship:</strong> Sessions provided by Duane Henry Coaching are educational and artistic consultations for professional and emerging actors.
-              </p>
-              <p>
-                <strong>2. Confidentiality & Non-Disclosure:</strong> All audition scripts, production sides, and creative materials submitted are held in absolute confidentiality. Duane Henry adheres to industry-standard non-disclosure protocols.
-              </p>
-              <p>
-                <strong>3. Cancellations & Rescheduling:</strong> Due to demanding production schedules, cancellations or rescheduling requests must be submitted at least 24 hours prior to the scheduled session.
-              </p>
-              <p>
-                <strong>4. Representation:</strong> Theatrical bookings, auditions, and agent engagements remain governed by CAM (UK) and The Gersh Agency (US).
-              </p>
-            </div>
-            <div className="mt-6 pt-4 border-t border-white/10 flex justify-end">
-              <button
-                onClick={() => setActiveModal(null)}
-                className="px-5 py-2 rounded-full bg-white text-black font-semibold text-[12px] tracking-wider uppercase hover:bg-accent-gold transition-colors"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modal for Privacy Policy */}
-      {activeModal === 'privacy' && (
-        <div className="fixed inset-0 z-10001 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-xl bg-page-bg-alt border border-white/15 rounded-2xl p-6 sm:p-8 text-white shadow-2xl">
-            <button
-              onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="flex items-center gap-2.5 text-accent-gold mb-3">
-              <Shield className="w-5 h-5" />
-              <span className="text-[11px] font-semibold tracking-[0.2em] uppercase">
-                Privacy Protection
-              </span>
-            </div>
-            <h3 className="font-sans font-bold text-[22px] text-white mb-4">
-              Privacy & Data Policy
-            </h3>
-            <div className="text-[13px] text-zinc-300 space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
-              <p>
-                <strong>Personal Information:</strong> I only collect information voluntarily submitted through my session booking or newsletter forms (such as your name, email address, IMDb/Spotlight profile, and audition sides).
-              </p>
-              <p>
-                <strong>Use of Data:</strong> Your data is used exclusively to schedule coaching sessions, coordinate virtual meetings, and send periodic updates if you have opted in. I never sell or distribute your personal data.
-              </p>
-              <p>
-                <strong>Material Security:</strong> Audition sides, self-tapes, and video files are handled with enterprise encryption and securely deleted after session completion upon request.
-              </p>
-            </div>
-            <div className="mt-6 pt-4 border-t border-white/10 flex justify-end">
-              <button
-                onClick={() => setActiveModal(null)}
-                className="px-5 py-2 rounded-full bg-white text-black font-semibold text-[12px] tracking-wider uppercase hover:bg-accent-gold transition-colors"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Legal document modal (Terms of Service / Privacy Policy) */}
+      {activeModal && (
+        <LegalModal
+          doc={LEGAL_DOCUMENTS[activeModal]}
+          onClose={() => setActiveModal(null)}
+        />
       )}
     </>
   );
