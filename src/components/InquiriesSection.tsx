@@ -3,6 +3,7 @@ import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { ConsultationFormData } from '../types';
 import { Check, ShieldCheck, Clock, MapPin, Mail, ArrowRight, ChevronDown } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { ErrorBoundary } from './ErrorBoundary';
 import { COACHING_DATA } from '../data/portfolioData';
 
 // Cloudflare Turnstile site key — public by design, safe to ship in the bundle.
@@ -338,17 +339,28 @@ export const InquiriesSection: React.FC<InquiriesSectionProps> = ({ preselectedO
 
                     {/* Cloudflare Turnstile verification */}
                     <div className="flex justify-end">
-                      <Turnstile
-                        ref={turnstileRef}
-                        siteKey={TURNSTILE_SITE_KEY}
-                        onSuccess={(token) => setTurnstileToken(token)}
-                        onExpire={() => setTurnstileToken(null)}
-                        onError={() => {
-                          setTurnstileToken(null);
-                          setSubmitError('Verification failed to load. Please refresh the page and try again.');
-                        }}
-                        options={{ theme: 'dark' }}
-                      />
+                      <ErrorBoundary
+                        fallback={
+                          <p className="text-[12px] text-zinc-400 py-2">
+                            Verification service temporarily unavailable. Please refresh or contact{' '}
+                            <a href="mailto:coaching@duanehenry.com" className="text-accent-gold underline">
+                              coaching@duanehenry.com
+                            </a>.
+                          </p>
+                        }
+                      >
+                        <Turnstile
+                          ref={turnstileRef}
+                          siteKey={TURNSTILE_SITE_KEY}
+                          onSuccess={(token) => setTurnstileToken(token)}
+                          onExpire={() => setTurnstileToken(null)}
+                          onError={() => {
+                            setTurnstileToken(null);
+                            setSubmitError('Verification failed to load. Please refresh the page and try again.');
+                          }}
+                          options={{ theme: 'dark' }}
+                        />
+                      </ErrorBoundary>
                     </div>
 
                     {/* Submit Bar */}

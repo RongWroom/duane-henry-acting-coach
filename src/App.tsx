@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, lazy, Suspense, type ReactNode } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Below-the-fold sections load as they approach the viewport.
 const BiographySection = lazy(() =>
@@ -61,7 +62,11 @@ const DeferredSection: React.FC<DeferredSectionProps> = ({ children, id, minHeig
 
   return (
     <div ref={containerRef} id={id} style={{ minHeight }}>
-      {shouldRender && <Suspense fallback={null}>{children}</Suspense>}
+      {shouldRender && (
+        <ErrorBoundary>
+          <Suspense fallback={null}>{children}</Suspense>
+        </ErrorBoundary>
+      )}
     </div>
   );
 };

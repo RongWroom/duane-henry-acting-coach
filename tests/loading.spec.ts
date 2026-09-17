@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { test, expect, type Page } from '@playwright/test';
 
 async function expectContent(page: Page) {
@@ -180,4 +181,42 @@ test('the works marquee auto-scrolls on touch devices', async ({ page, isMobile 
   const before = await readTransform();
   await page.waitForTimeout(300);
   expect(await readTransform()).not.toBe(before);
+});
+
+test('scrolling past coaching renders inquiries under production CSP without blanking the page', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+
+  const vercelConfig = JSON.parse(fs.readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+  const rawCsp = vercelConfig.headers
+    ?.find((h: any) => h.source === '/(.*)')
+    ?.headers?.find((h: any) => h.key === 'Content-Security-Policy')?.value;
+
+  expect(rawCsp).toBeDefined();
+
+  // Strip upgrade-insecure-requests only for local http test runner
+  const cspHeader = rawCsp.replace(/;\s*upgrade-insecure-requests/, '');
+
+  await page.route('**/*', async (route, req) => {
+    const response = await route.fetch();
+    if (req.resourceType() === 'document') {
+      const headers = { ...response.headers(), 'content-security-policy': cspHeader };
+      await route.fulfill({ response, headers });
+    } else {
+      await route.fulfill({ response });
+    }
+  });
+
+  await page.route('**/challenges.cloudflare.com/**', route =>
+    route.fulfill({ contentType: 'application/javascript', body: 'window.turnstile = { render: () => "w", reset: () => {}, remove: () => {} };' }));
+
+  await page.goto('/');
+  await page.locator('#coaching').scrollIntoViewIfNeeded();
+  await expect(page.locator('#coaching section')).toBeVisible();
+
+  // Scroll past Coaching / Practical Guidance into Inquiries
+  await page.locator('#inquiries').scrollIntoViewIfNeeded();
+  await expect(page.locator('#inquiries section')).toBeVisible();
+  await expect(page.locator('main')).toBeVisible();
+  expect(errors).toEqual([]);
 });
