@@ -20,11 +20,12 @@ async function expectContent(page: Page) {
 
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
-  test('the hero and stable lazy-loading placeholders render without JavaScript', async ({ page }) => {
+  test('the hero, biography, and stable lazy-loading placeholders render without JavaScript', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('h1')).toContainText('DUANE HENRY');
+    await expect(page.locator('#biography section')).toBeVisible();
 
-    for (const id of ['biography', 'works', 'coaching', 'inquiries']) {
+    for (const id of ['works', 'coaching', 'inquiries']) {
       const section = page.locator(`#${id}`);
       await expect(section).toBeVisible();
       await expect(section.locator('section')).toHaveCount(0);
@@ -37,7 +38,7 @@ test.describe('without JavaScript', () => {
   });
 });
 
-test('the hero paints while JavaScript is stalled, then the first section loads after hydration and scroll', async ({ page }) => {
+test('the hero and biography paint while JavaScript is stalled and hydrate without replacement', async ({ page }) => {
   let release!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   const errors: string[] = [];
@@ -47,19 +48,44 @@ test('the hero paints while JavaScript is stalled, then the first section loads 
   try {
     await page.goto('/', { waitUntil: 'commit' });
     await expect(page.locator('h1')).toContainText('DUANE HENRY');
-    await expect(page.locator('#biography section')).toHaveCount(0);
+    await expect(page.locator('#biography section')).toBeVisible();
     await page.waitForFunction(() => performance.getEntriesByName('first-contentful-paint').length > 0);
     console.log('First paint with scripts stalled:', await page.evaluate(() => performance.getEntriesByName('first-contentful-paint')[0].startTime));
-    await page.evaluate(() => { (window as any).__originalHero = document.querySelector('h1'); });
+    await page.evaluate(() => {
+      (window as any).__originalHero = document.querySelector('h1');
+      (window as any).__originalBiography = document.querySelector('#biography section');
+    });
   } finally { release(); }
   await page.locator('#biography').scrollIntoViewIfNeeded();
   await expect(page.locator('#biography section')).toBeVisible();
   expect(await page.evaluate(() => (window as any).__originalHero === document.querySelector('h1'))).toBe(true);
+  expect(await page.evaluate(() => (window as any).__originalBiography === document.querySelector('#biography section'))).toBe(true);
   expect(errors).toEqual([]);
 });
 
-test('sections load one chunk at a time when their scroll observers intersect', async ({ page }) => {
+test('biography reveal is positioned before it enters the viewport', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'Scroll reveals only animate with a fine pointer.');
   await page.addInitScript(() => {
+    (window as any).__bioAnimations = [];
+    const animate = Element.prototype.animate;
+    Element.prototype.animate = function (frames, options) {
+      if (this.closest('#biography')) {
+        (window as any).__bioAnimations.push((this as HTMLElement).style.transform);
+      }
+      return animate.call(this, frames, options);
+    };
+  });
+  await page.goto('/');
+  const firstReveal = page.locator('#biography section > div > div').first();
+  await expect.poll(() => firstReveal.evaluate(el => (el as HTMLElement).style.transform)).toBe('translateY(28px)');
+  await firstReveal.evaluate(el => window.scrollTo(0, window.scrollY + el.getBoundingClientRect().top - window.innerHeight + 100));
+  await expect.poll(() => page.evaluate(() => (window as any).__bioAnimations.length)).toBeGreaterThan(0);
+  expect(await page.evaluate(() => (window as any).__bioAnimations[0])).toBe('translateY(28px)');
+});
+
+test('sections initialize without waiting for an idle callback and load one chunk at a time', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.requestIdleCallback = () => 1;
     const observers = new Set<any>();
 
     class TestIntersectionObserver {
@@ -100,9 +126,10 @@ test('sections load one chunk at a time when their scroll observers intersect', 
   page.on('request', request => { if (request.resourceType() === 'script') scripts.push(request.url()); });
   await page.goto('/');
   await expect(page.locator('h1')).toContainText('DUANE HENRY');
-  expect(scripts.filter(url => /BiographySection|WorksSection|CoachingSection|InquiriesSection|Footer/.test(url))).toEqual([]);
+  await expect(page.locator('#biography section')).toBeVisible();
+  expect(scripts.filter(url => /WorksSection|CoachingSection|InquiriesSection|Footer/.test(url))).toEqual([]);
 
-  for (const id of ['biography', 'works', 'coaching', 'inquiries']) {
+  for (const id of ['works', 'coaching', 'inquiries']) {
     await page.locator(`#${id}`).scrollIntoViewIfNeeded();
     await page.evaluate((sectionId) => (window as any).__intersect(sectionId), id);
     await expect(page.locator(`#${id} section`)).toBeVisible();

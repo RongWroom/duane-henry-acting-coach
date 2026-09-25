@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState, lazy, Suspense, type ReactNode } from 'react';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
+import { BiographySection } from './components/BiographySection';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Below-the-fold sections load as they approach the viewport.
-const BiographySection = lazy(() =>
-  import('./components/BiographySection').then((module) => ({ default: module.BiographySection })),
-);
 const WorksSection = lazy(() =>
   import('./components/WorksSection').then((module) => ({ default: module.WorksSection })),
 );
@@ -120,9 +118,9 @@ export default function App() {
         <HeroSection />
 
         {/* Biography */}
-        <DeferredSection id="biography" minHeight="900px">
+        <div id="biography">
           <BiographySection />
-        </DeferredSection>
+        </div>
 
         {/* Selected Works & Reel */}
         <DeferredSection id="works" minHeight="1200px">

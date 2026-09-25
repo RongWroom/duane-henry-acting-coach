@@ -18,18 +18,4 @@ const hydrateApp = async () => {
   }
 };
 
-const scheduleHydration = (callback: () => void) => {
-  const requestIdleCallback = (window as {
-    requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => void;
-  }).requestIdleCallback;
-
-  if (requestIdleCallback) {
-    requestIdleCallback(callback, { timeout: 1500 });
-  } else {
-    window.setTimeout(callback, 0);
-  }
-};
-
-scheduleHydration(() => {
-  void hydrateApp();
-});
+void hydrateApp();
